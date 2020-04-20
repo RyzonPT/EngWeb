@@ -1,0 +1,16 @@
+<OperationModule xmlns:gr="http://www.webratio.com/2006/WebML/Graph" gr:x="325" gr:y="155" id="mov3#opm5" name="Adicionar Veiculo">
+  <OperationUnits>
+    <KOCollectorUnit id="mov3#opm5#kocu5" name="Nao Adicionado" gr:x="695" gr:y="0"/>
+    <InputCollectorUnit id="mov3#opm5#icu7" gr:x="0" gr:y="150">
+      <OKLink id="mov3#opm5#icu7#oln19" name="Add" to="mov3#opm5#opg5#cru3">
+        <LinkParameter id="mov3#opm5#icu7#oln19#par24" name="latitude_latitude" source="mov3#opm5#icu7#icp8" target="mov3#opm5#opg5#cru3.ent3#att9"/>
+        <LinkParameter id="mov3#opm5#icu7#oln19#par25" name="longitude_longitude" source="mov3#opm5#icu7#icp7" target="mov3#opm5#opg5#cru3.ent3#att10"/>
+      </OKLink>
+      <InputCollectorParameter id="mov3#opm5#icu7#icp7" name="longitude"/>
+      <InputCollectorParameter id="mov3#opm5#icu7#icp8" name="latitude"/>
+    </InputCollectorUnit>
+    <OKCollectorUnit id="mov3#opm5#okcu5" name="Adicionado" gr:x="695" gr:y="295">
+      <OutputCollectorParameter id="mov3#opm5#okcu5#ocp3" name="Veiculo"/>
+    </OKCollectorUnit>
+  </OperationUnits>
+</OperationModule>

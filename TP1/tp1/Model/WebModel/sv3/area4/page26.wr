@@ -1,0 +1,31 @@
+<Page xmlns:gr="http://www.webratio.com/2006/WebML/Graph" xmlns:layout="http://www.webratio.com/2006/WebML/Layout" gr:x="90" gr:y="645" id="sv3#area4#page26" name="Hist&#243;rico dos Pedestres">
+  <ContentUnits>
+    <PowerIndexUnit id="sv3#area4#page26#pwu12" name="Hist&#243;rico dos Pedestres" gr:x="0" gr:y="0" sortable="true" checkable="false" useCountQuery="false" entity="ent4" displayAttributes="rel10#role20.ent1#att1 ent4#att15 ent4#att19">
+      <Selector id="sv3#area4#page26#pwu12#su26" defaultPolicy="fill" booleanOperator="and">
+        <RelationshipRoleCondition id="sv3#area4#page26#pwu12#su26#rcond4" name="Passadeira" predicate="in" implied="false" role="rel11#role22"/>
+      </Selector>
+    </PowerIndexUnit>
+  </ContentUnits>
+  <layout:Grid containerType="grid">
+    <layout:Row>
+      <layout:Cell colspan="12">
+        <layout:Unit unitId="sv3#area4#page26#pwu12">
+          <layout:Attribute attribute="rel10#role20.ent1#att1"/>
+          <layout:Attribute attribute="ent4#att15"/>
+          <layout:Attribute attribute="ent4#att19"/>
+        </layout:Unit>
+      </layout:Cell>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+    </layout:Row>
+  </layout:Grid>
+</Page>

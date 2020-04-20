@@ -1,0 +1,48 @@
+<Page xmlns:gr="http://www.webratio.com/2006/WebML/Graph" xmlns:layout="http://www.webratio.com/2006/WebML/Layout" id="sv3#area5#page21" name="Lista de Veiculos" landmark="true" gr:x="0" gr:y="0">
+  <ContentUnits>
+    <PowerIndexUnit id="sv3#area5#page21#pwu9" name="Veiculos" linkOrder="sv3#area5#page21#pwu9#ln43 sv3#area5#page21#pwu9#ln44" gr:x="0" gr:y="5" sortable="false" checkable="false" useCountQuery="false" entity="ent3" displayAttributes="ent3#att3 ent3#att9 ent3#att10">
+      <Link id="sv3#area5#page21#pwu9#ln43" name="Apagar" to="sv3#miu15" type="normal" validate="true" ajaxOpenWaitingDialog="false">
+        <LinkParameter id="sv3#area5#page21#pwu9#ln43#par79" name="oid_oid" source="data[].ent3#att3" target="sv3#miu15.mov3#opm6#icu8#icp9"/>
+      </Link>
+      <Link id="sv3#area5#page21#pwu9#ln44" name="Editar" to="sv3#area5#page20#dau11" type="normal" automaticCoupling="true" validate="true"/>
+    </PowerIndexUnit>
+  </ContentUnits>
+  <layout:Grid containerType="grid">
+    <layout:Row>
+      <layout:Cell colspan="12">
+        <layout:Unit unitId="sv3#area5#page21#pwu9">
+          <layout:Attribute attribute="ent3#att3"/>
+          <layout:Attribute attribute="ent3#att9"/>
+          <layout:Attribute attribute="ent3#att10"/>
+          <layout:Link link="sv3#area5#page21#pwu9#ln43"/>
+          <layout:Link link="sv3#area5#page21#pwu9#ln44"/>
+        </layout:Unit>
+      </layout:Cell>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+    </layout:Row>
+    <layout:Row>
+      <layout:Cell colspan="12"/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+    </layout:Row>
+  </layout:Grid>
+</Page>

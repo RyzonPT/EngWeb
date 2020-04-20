@@ -1,0 +1,98 @@
+<Page xmlns:gr="http://www.webratio.com/2006/WebML/Graph" xmlns:layout="http://www.webratio.com/2006/WebML/Layout" id="sv3#area4#page15" name="Visualizar Passadeira" landmark="false" gr:x="115" gr:y="400">
+  <ContentUnits>
+    <DataUnit id="sv3#area4#page15#dau4" name="Passadeira" linkOrder="sv3#area4#page15#dau4#ln14 sv3#area4#page15#dau4#ln15 sv3#area4#page15#dau4#ln61 sv3#area4#page15#dau4#ln63" gr:x="0" gr:y="10" entity="ent2" displayAttributes="ent2#att2 ent2#att6 ent2#att7">
+      <Selector id="sv3#area4#page15#dau4#su7" defaultPolicy="fill" booleanOperator="and">
+        <KeyCondition id="sv3#area4#page15#dau4#su7#kcond7" name="KeyCondition15" predicate="in" implied="false"/>
+      </Selector>
+      <Link id="sv3#area4#page15#dau4#ln14" name="Ver Pedestres na Vizinhan&#231;a" to="sv3#area4#page17#qu4" type="normal" validate="true" gr:bendpoints="163,10,-342,0">
+        <LinkParameter id="sv3#area4#page15#dau4#ln14#par15" name="oid_idPassadeira" source="data.ent2#att2" target="sv3#area4#page17#qu4.sv3#area4#page17#qu4#qi4"/>
+      </Link>
+      <Link id="sv3#area4#page15#dau4#ln15" name="Ver Veiculos na Vizinhan&#231;a" to="sv3#area4#page14#qu3" type="normal" validate="true" gr:bendpoints="113,60,-387,35;489,72,-11,47">
+        <LinkParameter id="sv3#area4#page15#dau4#ln15#par20" name="oid_idPassadeira" source="data.ent2#att2" target="sv3#area4#page14#qu3.sv3#area4#page14#qu3#qi3"/>
+      </Link>
+      <Link id="sv3#area4#page15#dau4#ln61" name="Ver Hist&#243;rico de Ve&#237;culos" to="sv3#area4#page27#pwu11" type="normal" validate="true">
+        <LinkParameter id="sv3#area4#page15#dau4#ln61#par102" name="oid_Passadeira [oid]" source="data.ent2#att2" target="sv3#area4#page27#pwu11#su25#rcond3.ent2#att2"/>
+      </Link>
+      <Link id="sv3#area4#page15#dau4#ln63" name="Ver Hist&#243;rico de Pedestres" to="sv3#area4#page26#pwu12" type="normal" validate="true" newWindow="false" preserveForm="false">
+        <LinkParameter id="sv3#area4#page15#dau4#ln63#par104" name="idPassadeira_Passadeira [oid]" source="data.ent2#att2" target="sv3#area4#page26#pwu12#su26#rcond4.ent2#att2"/>
+      </Link>
+      <Link id="sv3#area4#page15#dau4#ln5" name="Flow5" to="sv3#area4#page15#qu6" type="transport" validate="true">
+        <LinkParameter id="sv3#area4#page15#dau4#ln5#par8" name="oid_idPassadeira" source="data.ent2#att2" target="sv3#area4#page15#qu6.sv3#area4#page15#qu6#qi5"/>
+      </Link>
+      <Link id="sv3#area4#page15#dau4#ln6" name="Flow6" to="sv3#area4#page15#qu5" type="transport" validate="true">
+        <LinkParameter id="sv3#area4#page15#dau4#ln6#par10" name="oid_idPassadeira" source="data.ent2#att2" target="sv3#area4#page15#qu5.sv3#area4#page15#qu5#qi6"/>
+      </Link>
+    </DataUnit>
+    <QueryUnit gr:x="215" gr:y="0" id="sv3#area4#page15#qu5" name="NrPedestres" mode="select" language="SQL" db="db1">
+      <QueryText xml:space="preserve">select COUNT(pes.oid) from passadeira as p
+		Inner Join 
+		pedestre pes
+		on ST_Distance_Sphere(point(p.latitude, p.longitude), point(pes.latitude, pes.longitude)) &lt;= 50 and p.oid in (:idPassadeira);
+</QueryText>      <QueryInput id="sv3#area4#page15#qu5#qi6" name="idPassadeira" required="true" type="integer"/>      <QueryOutput id="sv3#area4#page15#qu5#qo10" name="Nr Pedestres" type="integer"/>    </QueryUnit>    <QueryUnit gr:x="205" gr:y="95" id="sv3#area4#page15#qu6" name="NrVeiculos" mode="select" language="SQL" db="db1">      <QueryText xml:space="preserve">select COUNT(v.oid) from passadeira as p
+		Inner Join 
+		veiculo v
+		on ST_Distance_Sphere(point(p.latitude, p.longitude), point(v.latitude, v.longitude)) &lt;= 50 and p.oid in (:idPassadeira);</QueryText>
+      <QueryInput id="sv3#area4#page15#qu6#qi5" name="idPassadeira" required="true" type="integer"/>
+      <QueryOutput id="sv3#area4#page15#qu6#qo9" name="Nr Veiculos" type="integer"/>
+    </QueryUnit>
+  </ContentUnits>
+  <layout:Grid containerType="grid">
+    <layout:Row>
+      <layout:Cell colspan="12">
+        <layout:Unit unitId="sv3#area4#page15#dau4">
+          <layout:Attribute attribute="ent2#att2"/>
+          <layout:Attribute attribute="ent2#att6"/>
+          <layout:Attribute attribute="ent2#att7"/>
+          <layout:Link link="sv3#area4#page15#dau4#ln14"/>
+          <layout:Link link="sv3#area4#page15#dau4#ln15"/>
+          <layout:Link link="sv3#area4#page15#dau4#ln61"/>
+          <layout:Link link="sv3#area4#page15#dau4#ln63"/>
+        </layout:Unit>
+      </layout:Cell>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+    </layout:Row>
+    <layout:Row>
+      <layout:Cell colspan="12">
+        <layout:Unit unitId="sv3#area4#page15#qu5"/>
+      </layout:Cell>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+    </layout:Row>
+    <layout:Row>
+      <layout:Cell colspan="12">
+        <layout:Unit unitId="sv3#area4#page15#qu6"/>
+      </layout:Cell>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+    </layout:Row>
+  </layout:Grid>
+  <Variable id="sv3#area4#page15#var2" name="idPassadeira" unitId="sv3#area4#page15#dau4" type="integer" parameter="data.ent2#att2"/>
+</Page>

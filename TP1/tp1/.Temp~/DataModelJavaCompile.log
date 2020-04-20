@@ -1,0 +1,36 @@
+Buildfile: C:\WebRatio\WebRatio Platform 7.2.18.x64bit\WebRatio\plugins\com.webratio.generator.webapp_7.2.18.201903231300\DataModel\JavaCompile.xml
+
+main:
+    [javac] Compiling 6 source files to C:\WebRatio\WebRatio Platform 7.2.18.x64bit\Tomcat\webapps\tp1\WEB-INF\classes
+    [javac] ----------
+    [javac] 1. ERROR in C:\WebRatio\WebRatio Platform 7.2.18.x64bit\Tomcat\webapps\tp1\WEB-INF\classes\com\webratio\webapp\Passadeira.java (at line 13)
+    [javac] 	private java.util.Set _idPassadeira = new java.util.HashSet();
+    [javac] 	                      ^^^^^^^^^^^^^
+    [javac] Duplicate field Passadeira._idPassadeira
+    [javac] ----------
+    [javac] 2. ERROR in C:\WebRatio\WebRatio Platform 7.2.18.x64bit\Tomcat\webapps\tp1\WEB-INF\classes\com\webratio\webapp\Passadeira.java (at line 15)
+    [javac] 	private java.util.Set _idPassadeira = new java.util.HashSet();
+    [javac] 	                      ^^^^^^^^^^^^^
+    [javac] Duplicate field Passadeira._idPassadeira
+    [javac] ----------
+    [javac] 3. ERROR in C:\WebRatio\WebRatio Platform 7.2.18.x64bit\Tomcat\webapps\tp1\WEB-INF\classes\com\webratio\webapp\Passadeira.java (at line 43)
+    [javac] 	public java.util.Set getIdPassadeira() {
+    [javac] 	                     ^^^^^^^^^^^^^^^^^
+    [javac] Duplicate method getIdPassadeira() in type Passadeira
+    [javac] ----------
+    [javac] 4. ERROR in C:\WebRatio\WebRatio Platform 7.2.18.x64bit\Tomcat\webapps\tp1\WEB-INF\classes\com\webratio\webapp\Passadeira.java (at line 47)
+    [javac] 	public void setIdPassadeira(java.util.Set _idPassadeira) {
+    [javac] 	            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    [javac] Duplicate method setIdPassadeira(Set) in type Passadeira
+    [javac] ----------
+    [javac] 5. ERROR in C:\WebRatio\WebRatio Platform 7.2.18.x64bit\Tomcat\webapps\tp1\WEB-INF\classes\com\webratio\webapp\Passadeira.java (at line 51)
+    [javac] 	public java.util.Set getIdPassadeira() {
+    [javac] 	                     ^^^^^^^^^^^^^^^^^
+    [javac] Duplicate method getIdPassadeira() in type Passadeira
+    [javac] ----------
+    [javac] 6. ERROR in C:\WebRatio\WebRatio Platform 7.2.18.x64bit\Tomcat\webapps\tp1\WEB-INF\classes\com\webratio\webapp\Passadeira.java (at line 55)
+    [javac] 	public void setIdPassadeira(java.util.Set _idPassadeira) {
+    [javac] 	            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    [javac] Duplicate method setIdPassadeira(Set) in type Passadeira
+    [javac] ----------
+    [javac] 6 problems (6 errors)

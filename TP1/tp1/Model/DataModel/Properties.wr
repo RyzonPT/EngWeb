@@ -1,0 +1,127 @@
+<DataModel xmlns:db="http://www.webratio.com/2006/WebML/Database" xmlns:gr="http://www.webratio.com/2006/WebML/Graph">
+  <Entity id="User" name="User" duration="persistent" gr:x="240" gr:y="225" gr:hideAttributes="false" attributeOrder="userOID userName password email" db:database="db1" db:table="user">
+    <Attribute name="oid" id="userOID" type="integer" key="true" db:column="oid"/>
+    <Attribute name="userName" id="userName" type="string" db:column="username"/>
+    <Attribute name="password" id="password" type="password" db:column="password"/>
+    <Attribute name="email" id="email" type="string" db:column="email"/>
+  </Entity>
+  <Entity id="Group" name="Group" duration="persistent" gr:x="245" gr:y="65" gr:hideAttributes="false" attributeOrder="groupOID groupName" db:database="db1" db:table="group">
+    <Attribute name="oid" id="groupOID" type="integer" key="true" db:column="oid"/>
+    <Attribute name="groupName" id="groupName" type="string" db:column="groupname"/>
+  </Entity>
+  <Entity id="Module" name="Module" duration="persistent" gr:x="580" gr:y="50" gr:hideAttributes="false" attributeOrder="moduleOID moduleID moduleName" db:database="db1" db:table="module">
+    <Attribute name="oid" id="moduleOID" type="integer" key="true" db:column="oid"/>
+    <Attribute name="moduleID" id="moduleID" type="string" db:column="moduleid"/>
+    <Attribute name="moduleName" id="moduleName" type="string" db:column="modulename"/>
+  </Entity>
+  <Relationship id="User2Group_Group2User" name="User_Group" sourceEntity="User" targetEntity="Group" db:database="db1" db:table="user_group">
+    <RelationshipRole1 id="User2Group" name="groups" maxCard="N">
+      <db:JoinColumn attribute="userOID" name="user_oid"/>
+    </RelationshipRole1>
+    <RelationshipRole2 id="Group2User" name="users" maxCard="N">
+      <db:JoinColumn attribute="groupOID" name="group_oid"/>
+    </RelationshipRole2>
+  </Relationship>
+  <Relationship id="User2DefaultGroup_DefaultGroup2User" name="User_DefaultGroup" sourceEntity="User" targetEntity="Group" gr:bendpoints="113,42,-112,44" db:database="db1" db:table="user">
+    <RelationshipRole1 id="User2DefaultGroup" name="defaultGroup" maxCard="1">
+      <db:JoinColumn attribute="userOID" name="oid"/>
+    </RelationshipRole1>
+    <RelationshipRole2 id="DefaultGroup2User" name="defaultUsers" maxCard="N">
+      <db:JoinColumn attribute="groupOID" name="group_oid"/>
+    </RelationshipRole2>
+  </Relationship>
+  <Relationship id="Group2DefaultModule_DefaultModule2Group" name="Group_DefaultModule" sourceEntity="Group" targetEntity="Module" db:database="db1" db:table="group">
+    <RelationshipRole1 id="Group2DefaultModule" name="defaultModule" maxCard="1">
+      <db:JoinColumn attribute="groupOID" name="oid"/>
+    </RelationshipRole1>
+    <RelationshipRole2 id="DefaultModule2Group" name="defaultGroups" maxCard="N">
+      <db:JoinColumn attribute="moduleOID" name="module_oid"/>
+    </RelationshipRole2>
+  </Relationship>
+  <Relationship id="Group2Module_Module2Group" name="Group_Module" sourceEntity="Group" targetEntity="Module" gr:bendpoints="110,41,-115,41" db:database="db1" db:table="group_module">
+    <RelationshipRole1 id="Group2Module" name="modules" maxCard="N">
+      <db:JoinColumn attribute="groupOID" name="group_oid"/>
+    </RelationshipRole1>
+    <RelationshipRole2 id="Module2Group" name="groups" maxCard="N">
+      <db:JoinColumn attribute="moduleOID" name="module_oid"/>
+    </RelationshipRole2>
+  </Relationship>
+  <Entity gr:x="260" gr:y="475" id="ent1" name="Pedestre" duration="persistent" attributeOrder="ent1#att1 ent1#att4 ent1#att5" db:database="db1" db:table="pedestre">
+    <Attribute id="ent1#att1" key="true" name="oid" type="integer" db:column="oid"/>
+    <Attribute id="ent1#att4" name="latitude" type="float" db:column="latitude"/>
+    <Attribute id="ent1#att5" name="longitude" type="float" db:column="longitude"/>
+  </Entity>
+  <Entity gr:x="720" gr:y="475" id="ent2" name="Passadeira" duration="persistent" attributeOrder="ent2#att2 ent2#att6 ent2#att7 ent2#att11 ent2#att12 ent2#att13" db:database="db1" db:table="passadeira">
+    <Attribute id="ent2#att2" key="true" name="oid" type="integer" db:column="oid"/>
+    <Attribute id="ent2#att6" name="latitude" type="float" db:column="latitude"/>
+    <Attribute id="ent2#att7" name="longitude" type="float" db:column="longitude"/>
+    <Attribute id="ent2#att11" name="nrPedestres" type="integer" db:column="nrpedestres"/>
+    <Attribute id="ent2#att12" name="nrVeiculos" type="integer" db:column="nrveiculos"/>
+    <Attribute id="ent2#att13" name="estado" type="string" db:column="estado"/>
+  </Entity>
+  <Entity gr:x="600" gr:y="250" id="ent3" name="Veiculo" duration="persistent" attributeOrder="ent3#att3 ent3#att9 ent3#att10" db:database="db1" db:table="veiculo">
+    <Attribute id="ent3#att3" key="true" name="oid" type="integer" db:column="oid"/>
+    <Attribute id="ent3#att9" name="latitude" type="float" db:column="latitude"/>
+    <Attribute id="ent3#att10" name="longitude" type="float" db:column="longitude"/>
+  </Entity>
+  <Relationship id="rel3" name="User_Pedestre" sourceEntity="User" targetEntity="ent1" db:database="db1" db:table="pedestre">
+    <RelationshipRole1 id="rel3#role5" name="UserToPedestre" maxCard="1">
+      <db:JoinColumn attribute="userOID" name="user_oid"/>
+    </RelationshipRole1>
+    <RelationshipRole2 id="rel3#role6" name="PedestreToUser" maxCard="1">
+      <db:JoinColumn attribute="ent1#att1" name="oid"/>
+    </RelationshipRole2>
+  </Relationship>
+  <Relationship id="rel4" name="User_Veiculo" sourceEntity="User" targetEntity="ent3" db:database="db1" db:table="veiculo">
+    <RelationshipRole1 id="rel4#role7" name="UserToVeiculo" maxCard="1">
+      <db:JoinColumn attribute="userOID" name="user_oid"/>
+    </RelationshipRole1>
+    <RelationshipRole2 id="rel4#role8" name="VeiculoToUser" maxCard="1">
+      <db:JoinColumn attribute="ent3#att3" name="oid"/>
+    </RelationshipRole2>
+  </Relationship>
+  <db:Database id="db1" name="SPWS" type="MySQL (InnoDB)" url="jdbc:mysql://127.0.0.1:3306/spws" username="root" cryptedPassword="true" password="cm9vdA==">
+  </db:Database>
+  <Entity gr:x="480" gr:y="495" id="ent4" duration="persistent" name="Historico_Pedestre" attributeOrder="ent4#att14 ent4#att15 ent4#att19" db:database="db1" db:table="historico_pedestre">
+    <Attribute id="ent4#att14" key="true" name="oid" type="integer" db:column="oid"/>
+    <Attribute id="ent4#att15" name="data" type="timestamp" db:column="data"/>
+    <Attribute id="ent4#att19" name="distancia" type="float" db:column="distancia"/>
+  </Entity>
+  <Entity gr:x="815" gr:y="335" id="ent5" name="Historico_Veiculos" duration="persistent" attributeOrder="ent5#att16 ent5#att17 ent5#att20" db:database="db1" db:table="historico_veiculos">
+    <Attribute id="ent5#att16" key="true" name="oid" type="integer" db:column="oid"/>
+    <Attribute id="ent5#att17" name="data" type="timestamp" db:column="data"/>
+    <Attribute id="ent5#att20" name="distancia" type="float" db:column="distancia"/>
+  </Entity>
+  <Relationship id="rel10" name="Pedestre_Historico_Pedestre" sourceEntity="ent1" targetEntity="ent4" db:database="db1" db:table="historico_pedestre">
+    <RelationshipRole1 id="rel10#role19" name="PedestreToHistorico_Pedestre" maxCard="N">
+      <db:JoinColumn attribute="ent1#att1" name="pedestre_oid"/>
+    </RelationshipRole1>
+    <RelationshipRole2 id="rel10#role20" name="Historico_PedestreToPedestre" maxCard="1">
+      <db:JoinColumn attribute="ent4#att14" name="oid"/>
+    </RelationshipRole2>
+  </Relationship>
+  <Relationship id="rel11" name="Historico_Pedestre_Passadeira" sourceEntity="ent4" targetEntity="ent2" db:database="db1" db:table="historico_pedestre">
+    <RelationshipRole1 id="rel11#role21" name="Historico_PedestreToPassadeira" maxCard="1">
+      <db:JoinColumn attribute="ent4#att14" name="oid"/>
+    </RelationshipRole1>
+    <RelationshipRole2 id="rel11#role22" name="PassadeiraToHistorico_Pedestre" maxCard="N">
+      <db:JoinColumn attribute="ent2#att2" name="passadeira_oid"/>
+    </RelationshipRole2>
+  </Relationship>
+  <Relationship id="rel12" name="Historico_Veiculos_Passadeira" sourceEntity="ent5" targetEntity="ent2" db:database="db1" db:table="historico_veiculos">
+    <RelationshipRole1 id="rel12#role23" name="Historico_VeiculosToPassadeira" maxCard="1">
+      <db:JoinColumn attribute="ent5#att16" name="oid"/>
+    </RelationshipRole1>
+    <RelationshipRole2 id="rel12#role24" name="PassadeiraToHistorico_Veiculos" maxCard="N">
+      <db:JoinColumn attribute="ent2#att2" name="passadeira_oid"/>
+    </RelationshipRole2>
+  </Relationship>
+  <Relationship id="rel13" name="Historico_Veiculos_Veiculo" sourceEntity="ent5" targetEntity="ent3" db:database="db1" db:table="historico_veiculos">
+    <RelationshipRole1 id="rel13#role25" name="Historico_VeiculosToVeiculo" maxCard="1">
+      <db:JoinColumn attribute="ent5#att16" name="oid"/>
+    </RelationshipRole1>
+    <RelationshipRole2 id="rel13#role26" name="VeiculoToHistorico_Veiculos" maxCard="N">
+      <db:JoinColumn attribute="ent3#att3" name="veiculo_oid"/>
+    </RelationshipRole2>
+  </Relationship>
+</DataModel>

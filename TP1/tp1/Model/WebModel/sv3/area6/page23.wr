@@ -1,0 +1,68 @@
+<Page xmlns:gr="http://www.webratio.com/2006/WebML/Graph" xmlns:layout="http://www.webratio.com/2006/WebML/Layout" id="sv3#area6#page23" name="Visualizar Pedestre" linkOrder="sv3#area6#page23#ln49" landmark="false" protected="false" gr:x="300" gr:y="0">
+  <ContentUnits>
+    <DataUnit id="sv3#area6#page23#dau13" name="Pedestre" gr:x="0" gr:y="0" entity="ent1" displayAll="true">
+      <Selector id="sv3#area6#page23#dau13#su23" defaultPolicy="fill" booleanOperator="and">
+        <KeyCondition id="sv3#area6#page23#dau13#su23#kcond19" name="KeyCondition9" predicate="in" implied="false"/>
+      </Selector>
+      <Link id="sv3#area6#page23#dau13#ln47" name="Flow20" to="sv3#area6#page23#enu11" type="transport" validate="true">
+        <LinkParameter id="sv3#area6#page23#dau13#ln47#par85" name="oid_Key Condition [oid]" source="data.ent1#att1" target="sv3#area6#page23#enu11.ent3#att3"/>
+        <LinkParameter id="sv3#area6#page23#dau13#ln47#par86" name="latitude_Latitude" source="data.ent1#att4" target="sv3#area6#page23#enu11#fld26_slot"/>
+        <LinkParameter id="sv3#area6#page23#dau13#ln47#par87" name="oid_oid" source="data.ent1#att1" target="sv3#area6#page23#enu11#fld28_slot"/>
+        <LinkParameter id="sv3#area6#page23#dau13#ln47#par88" name="longitude_Longitude" source="data.ent1#att5" target="sv3#area6#page23#enu11#fld27_slot"/>
+      </Link>
+    </DataUnit>
+    <EntryUnit id="sv3#area6#page23#enu11" name="Editar Pedestre" linkOrder="sv3#area6#page23#enu11#ln48" gr:x="150" gr:y="20" entity="ent1">
+      <Field id="sv3#area6#page23#enu11#fld26" name="Latitude" type="float" modifiable="true" preloaded="true"/>
+      <Field id="sv3#area6#page23#enu11#fld27" name="Longitude" type="float" modifiable="true" preloaded="true"/>
+      <Field id="sv3#area6#page23#enu11#fld28" name="oid" type="string" modifiable="false" preloaded="true"/>
+      <Link id="sv3#area6#page23#enu11#ln48" name="Confirmar" to="sv3#miu16" type="normal" validate="true">
+        <LinkParameter id="sv3#area6#page23#enu11#ln48#par89" name="Latitude_latitude" source="sv3#area6#page23#enu11#fld26" target="sv3#miu16.mov2#opm8#icu11#icp14"/>
+        <LinkParameter id="sv3#area6#page23#enu11#ln48#par90" name="Longitude_longitude" source="sv3#area6#page23#enu11#fld27" target="sv3#miu16.mov2#opm8#icu11#icp13"/>
+        <LinkParameter id="sv3#area6#page23#enu11#ln48#par91" name="oid_oid" source="sv3#area6#page23#enu11#fld28" target="sv3#miu16.mov2#opm8#icu11#icp15"/>
+      </Link>
+    </EntryUnit>
+  </ContentUnits>
+  <layout:Grid containerType="grid">
+    <layout:Row>
+      <layout:Cell colspan="12">
+        <layout:Unit unitId="sv3#area6#page23#dau13">
+          <layout:Attribute attribute="ent1#att4"/>
+          <layout:Attribute attribute="ent1#att5"/>
+        </layout:Unit>
+      </layout:Cell>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+    </layout:Row>
+    <layout:Row>
+      <layout:Cell colspan="12">
+        <layout:Unit unitId="sv3#area6#page23#enu11">
+          <layout:Field field="sv3#area6#page23#enu11#fld26"/>
+          <layout:Field field="sv3#area6#page23#enu11#fld27"/>
+          <layout:Field field="sv3#area6#page23#enu11#fld28"/>
+          <layout:Link link="sv3#area6#page23#enu11#ln48"/>
+        </layout:Unit>
+      </layout:Cell>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+    </layout:Row>
+  </layout:Grid>
+  <Link id="sv3#area6#page23#ln49" name="Voltar" to="sv3#area6#page25" type="normal" automaticCoupling="true" validate="true" gr:bendpoints="-297,-60,83,-25"/>
+</Page>

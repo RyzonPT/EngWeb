@@ -1,0 +1,18 @@
+<OperationModule xmlns:gr="http://www.webratio.com/2006/WebML/Graph" id="mov2#opm8" name="Editar Pedestre" gr:x="325" gr:y="285">
+  <OperationUnits>
+    <OKCollectorUnit id="mov2#opm8#okcu9" name="Editado" gr:x="695" gr:y="295">
+      <OutputCollectorParameter id="mov2#opm8#okcu9#ocp6" name="Pedestre"/>
+    </OKCollectorUnit>
+    <InputCollectorUnit id="mov2#opm8#icu11" gr:x="0" gr:y="150">
+      <InputCollectorParameter id="mov2#opm8#icu11#icp13" name="longitude"/>
+      <InputCollectorParameter id="mov2#opm8#icu11#icp14" name="latitude"/>
+      <InputCollectorParameter id="mov2#opm8#icu11#icp15" name="oid"/>
+      <OKLink id="mov2#opm8#icu11#oln28" name="OKFlow25" to="mov2#opm8#opg9#mfu2">
+        <LinkParameter id="mov2#opm8#icu11#oln28#par53" name="oid_KeyCondition10 [oid]" source="mov2#opm8#icu11#icp15" target="mov2#opm8#opg9#mfu2#su11#kcond11.ent1#att1"/>
+        <LinkParameter id="mov2#opm8#icu11#oln28#par54" name="latitude_latitude" source="mov2#opm8#icu11#icp14" target="mov2#opm8#opg9#mfu2.ent1#att4"/>
+        <LinkParameter id="mov2#opm8#icu11#oln28#par55" name="longitude_longitude" source="mov2#opm8#icu11#icp13" target="mov2#opm8#opg9#mfu2.ent1#att5"/>
+      </OKLink>
+    </InputCollectorUnit>
+    <KOCollectorUnit id="mov2#opm8#kocu9" name="Nao Editado" gr:x="695" gr:y="0"/>
+  </OperationUnits>
+</OperationModule>

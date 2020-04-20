@@ -1,0 +1,16 @@
+<OperationModule xmlns:gr="http://www.webratio.com/2006/WebML/Graph" gr:x="315" gr:y="105" id="mov1#opm1" name="AddPassadeira">
+  <OperationUnits>
+    <InputCollectorUnit gr:x="0" gr:y="150" id="mov1#opm1#icu1">
+      <OKLink id="mov1#opm1#icu1#oln2" to="mov1#opm1#opg1#cru1" validate="true" name="Add">
+        <LinkParameter id="mov1#opm1#icu1#oln2#par1" name="latitude_latitude" source="mov1#opm1#icu1#icp1" target="mov1#opm1#opg1#cru1.ent2#att6"/>
+        <LinkParameter id="mov1#opm1#icu1#oln2#par2" name="longitude_longitude" source="mov1#opm1#icu1#icp2" target="mov1#opm1#opg1#cru1.ent2#att7"/>
+      </OKLink>
+      <InputCollectorParameter id="mov1#opm1#icu1#icp2" name="longitude"/>
+      <InputCollectorParameter id="mov1#opm1#icu1#icp1" name="latitude"/>
+    </InputCollectorUnit>
+    <OKCollectorUnit gr:x="695" gr:y="295" id="mov1#opm1#okcu1" name="OK Port1">
+      <OutputCollectorParameter id="mov1#opm1#okcu1#ocp1" name="Passadeira"/>
+    </OKCollectorUnit>
+    <KOCollectorUnit gr:x="695" gr:y="0" id="mov1#opm1#kocu1" name="KO Port1"/>
+  </OperationUnits>
+</OperationModule>

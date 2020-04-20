@@ -1,0 +1,11 @@
+<Page xmlns:gr="http://www.webratio.com/2006/WebML/Graph" xmlns:layout="http://www.webratio.com/2006/WebML/Layout" id="sv3#area4#page14" name="Distancia Veiculos" gr:x="700" gr:y="575">
+  <ContentUnits>
+    <QueryUnit id="sv3#area4#page14#qu3" name="PertoVeiculo" gr:x="0" gr:y="0" mode="select" language="SQL" db="db1">
+      <QueryText xml:space="preserve">select v.oid,  ST_Distance_Sphere(
+			point(p.latitude, p.longitude),
+			point(v.latitude, v.longitude)
+		) as distancia from passadeira as p
+		Inner Join 
+		veiculo v
+		on ST_Distance_Sphere(point(p.latitude, p.longitude), point(v.latitude, v.longitude)) &lt;= 50 and p.oid in (:idPassadeira);
+</QueryText>      <QueryOutput id="sv3#area4#page14#qu3#qo2" name="oidVeiculo" type="integer"/>      <QueryOutput id="sv3#area4#page14#qu3#qo6" name="distancia" type="float"/>      <QueryInput id="sv3#area4#page14#qu3#qi3" name="idPassadeira" required="true" type="integer"/>    </QueryUnit>  </ContentUnits>  <layout:Grid containerType="grid">    <layout:Row>      <layout:Cell colspan="12">        <layout:Unit unitId="sv3#area4#page14#qu3"/>      </layout:Cell>      <layout:Cell/>      <layout:Cell/>      <layout:Cell/>      <layout:Cell/>      <layout:Cell/>      <layout:Cell/>      <layout:Cell/>      <layout:Cell/>      <layout:Cell/>      <layout:Cell/>      <layout:Cell/>    </layout:Row>  </layout:Grid></Page>

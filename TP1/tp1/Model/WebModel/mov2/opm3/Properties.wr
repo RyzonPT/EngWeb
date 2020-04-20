@@ -1,0 +1,16 @@
+<OperationModule xmlns:gr="http://www.webratio.com/2006/WebML/Graph" gr:x="300" gr:y="65" id="mov2#opm3" name="Adicionar Pedestre">
+  <OperationUnits>
+    <InputCollectorUnit id="mov2#opm3#icu4" gr:x="0" gr:y="150">
+      <OKLink id="mov2#opm3#icu4#oln10" name="Add" to="mov2#opm3#opg3#cru2">
+        <LinkParameter id="mov2#opm3#icu4#oln10#par16" name="latitude_latitude" source="mov2#opm3#icu4#icp5" target="mov2#opm3#opg3#cru2.ent1#att4"/>
+        <LinkParameter id="mov2#opm3#icu4#oln10#par17" name="longitude_longitude" source="mov2#opm3#icu4#icp4" target="mov2#opm3#opg3#cru2.ent1#att5"/>
+      </OKLink>
+      <InputCollectorParameter id="mov2#opm3#icu4#icp4" name="longitude"/>
+      <InputCollectorParameter id="mov2#opm3#icu4#icp5" name="latitude"/>
+    </InputCollectorUnit>
+    <OKCollectorUnit id="mov2#opm3#okcu3" name="OK Port1" gr:x="695" gr:y="295">
+      <OutputCollectorParameter id="mov2#opm3#okcu3#ocp2" name="Pedestre"/>
+    </OKCollectorUnit>
+    <KOCollectorUnit id="mov2#opm3#kocu3" name="KO Port1" gr:x="695" gr:y="0"/>
+  </OperationUnits>
+</OperationModule>

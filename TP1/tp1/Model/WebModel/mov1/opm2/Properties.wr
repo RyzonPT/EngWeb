@@ -1,0 +1,12 @@
+<OperationModule xmlns:gr="http://www.webratio.com/2006/WebML/Graph" gr:x="315" gr:y="195" id="mov1#opm2" name="RemovePassadeira">
+  <OperationUnits>
+    <InputCollectorUnit id="mov1#opm2#icu2" gr:x="30" gr:y="60">
+      <InputCollectorParameter id="mov1#opm2#icu2#icp3" name="oid"/>
+      <OKLink id="mov1#opm2#icu2#oln8" name="OKFlow8" to="mov1#opm2#opg2#dlu1">
+        <LinkParameter id="mov1#opm2#icu2#oln8#par9" name="oid_KeyCondition2 [oid]" source="mov1#opm2#icu2#icp3" target="mov1#opm2#opg2#dlu1#su2#kcond2.ent2#att2"/>
+      </OKLink>
+    </InputCollectorUnit>
+    <OKCollectorUnit gr:x="520" gr:y="200" id="mov1#opm2#okcu2" name="Deleted"/>
+    <KOCollectorUnit gr:x="520" gr:y="45" id="mov1#opm2#kocu2" name="Not Deleted"/>
+  </OperationUnits>
+</OperationModule>

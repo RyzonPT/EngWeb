@@ -1,0 +1,13 @@
+<OperationGroup xmlns:gr="http://www.webratio.com/2006/WebML/Graph" id="mov1#opm9#opg10" name="Operation Group 1" transaction="true" gr:x="335" gr:y="110">
+  <OperationUnits>
+    <ModifyUnit id="mov1#opm9#opg10#mfu3" name="Update1" gr:x="0" gr:y="0" entity="ent2">
+      <Selector id="mov1#opm9#opg10#mfu3#su12" defaultPolicy="fill" booleanOperator="and">
+        <KeyCondition id="mov1#opm9#opg10#mfu3#su12#kcond12" name="KeyCondition10" predicate="in" implied="false"/>
+      </Selector>
+      <OKLink id="mov1#opm9#opg10#mfu3#oln31" name="OKFlow26" to="mov1#opm9#okcu10">
+        <LinkParameter id="mov1#opm9#opg10#mfu3#oln31#par59" name="oid_Veiculo" source="ent2#att2Array" target="mov1#opm9#okcu10#ocp7"/>
+      </OKLink>
+    </ModifyUnit>
+  </OperationUnits>
+  <KOLink id="mov1#opm9#opg10#kln17" name="KOFlow5" to="mov1#opm9#kocu10" automaticCoupling="true"/>
+</OperationGroup>

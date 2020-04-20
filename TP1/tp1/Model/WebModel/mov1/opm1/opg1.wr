@@ -1,0 +1,10 @@
+<OperationGroup xmlns:gr="http://www.webratio.com/2006/WebML/Graph" gr:x="315" gr:y="225" id="mov1#opm1#opg1" name="Operation Group 1" transaction="true">
+  <OperationUnits>
+    <CreateUnit gr:x="0" gr:y="0" id="mov1#opm1#opg1#cru1" name="AddPassadeira" entity="ent2">
+      <OKLink id="mov1#opm1#opg1#cru1#oln6" name="OKFlow6" to="mov1#opm1#okcu1">
+        <LinkParameter id="mov1#opm1#opg1#cru1#oln6#par5" name="oid_Passadeira" source="ent2#att2Array" target="mov1#opm1#okcu1#ocp1"/>
+      </OKLink>
+    </CreateUnit>
+  </OperationUnits>
+  <KOLink id="mov1#opm1#opg1#kln5" name="KOFlow5" to="mov1#opm1#kocu1" automaticCoupling="true"/>
+</OperationGroup>

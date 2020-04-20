@@ -1,0 +1,43 @@
+[10 Abr 2020 14:45:02] DEBUG Executing SQL script
+[10 Abr 2020 14:45:02] INFO ================================================================================
+[10 Abr 2020 14:45:02] INFO onError= 'stop'
+[10 Abr 2020 14:45:02] INFO autoCommit= 'false'
+[10 Abr 2020 14:45:02] INFO username= 'root'
+[10 Abr 2020 14:45:02] INFO outputPath= 'C:\WebRatio\WebRatio Platform 7.2.18.x64bit\workspace\tp1\.Temp~\RollbackSQL.xml'
+[10 Abr 2020 14:45:02] INFO outputLogPath= 'C:\WebRatio\WebRatio Platform 7.2.18.x64bit\workspace\tp1\.Temp~\RollbackSQL.xml.log'
+[10 Abr 2020 14:45:02] INFO encoding= ''
+[10 Abr 2020 14:45:02] INFO driverClass= 'com.mysql.jdbc.Driver'
+[10 Abr 2020 14:45:02] INFO sqlScript= 'C:\WebRatio\WebRatio Platform 7.2.18.x64bit\workspace\tp1\.Temp~\RollbackSQL.sql'
+[10 Abr 2020 14:45:02] INFO eventSocketPort= '54613'
+[10 Abr 2020 14:45:02] INFO statementSeparator= ';'
+[10 Abr 2020 14:45:02] INFO derby.system.home= 'C:\WebRatio\WebRatio Platform 7.2.18.x64bit\workspace\.metadata\.plugins\com.webratio.commons.db\derby'
+[10 Abr 2020 14:45:02] INFO password= 'admin'
+[10 Abr 2020 14:45:02] INFO url= 'jdbc:mysql://127.0.0.1:3306/spws'
+[10 Abr 2020 14:45:02] INFO ================================================================================
+[10 Abr 2020 14:45:02] INFO Connecting to the Database...
+[10 Abr 2020 14:45:03] INFO Database connection estabilished
+[10 Abr 2020 14:45:03] INFO transaction isolation: 4
+[10 Abr 2020 14:45:03] DEBUG ================================================================================
+[10 Abr 2020 14:45:03] DEBUG Executing SQL script file: C:\WebRatio\WebRatio Platform 7.2.18.x64bit\workspace\tp1\.Temp~\RollbackSQL.sql
+[10 Abr 2020 14:45:03] DEBUG Executing statement:  alter table `user_group`   drop foreign key `fk_user_group_group`
+[10 Abr 2020 14:45:03] DEBUG Executing statement:  alter table `user_group`   drop foreign key `fk_user_group_user`
+[10 Abr 2020 14:45:03] DEBUG Executing statement:  drop table `user_group`
+[10 Abr 2020 14:45:03] DEBUG Executing statement:  alter table `user`   drop foreign key `fk_user_group`
+[10 Abr 2020 14:45:03] DEBUG Executing statement:  alter table `user`  drop column  `group_oid`
+[10 Abr 2020 14:45:03] DEBUG Executing statement:  alter table `group_module`   drop foreign key `fk_group_module_module`
+[10 Abr 2020 14:45:03] DEBUG Executing statement:  alter table `group_module`   drop foreign key `fk_group_module_group`
+[10 Abr 2020 14:45:03] DEBUG Executing statement:  drop table `group_module`
+[10 Abr 2020 14:45:03] DEBUG Executing statement:  alter table `group`   drop foreign key `fk_group_module`
+[10 Abr 2020 14:45:03] DEBUG Executing statement:  alter table `group`  drop column  `module_oid`
+[10 Abr 2020 14:45:04] DEBUG Executing statement:  drop table `historico_veiculos`
+[10 Abr 2020 14:45:04] DEBUG Executing statement:  drop table `historico_pedestre`
+[10 Abr 2020 14:45:04] DEBUG Executing statement:  drop table `veiculo`
+[10 Abr 2020 14:45:04] DEBUG Executing statement:  drop table `passadeira`
+[10 Abr 2020 14:45:04] DEBUG Executing statement:  drop table `pedestre`
+[10 Abr 2020 14:45:04] DEBUG Executing statement:  drop table `user`
+[10 Abr 2020 14:45:04] DEBUG Executing statement:  drop table `module`
+[10 Abr 2020 14:45:04] DEBUG Executing statement:  drop table `group`
+[10 Abr 2020 14:45:04] DEBUG ================================================================================
+[10 Abr 2020 14:45:04] DEBUG SQL SCRIPT SUCCESSFULLY EXECUTED
+[10 Abr 2020 14:45:04] INFO Database connection closed
+[10 Abr 2020 14:45:04] DEBUG Total time: 2471 milliseconds

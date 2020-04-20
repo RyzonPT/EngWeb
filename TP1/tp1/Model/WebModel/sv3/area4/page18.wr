@@ -1,0 +1,71 @@
+<Page xmlns:gr="http://www.webratio.com/2006/WebML/Graph" xmlns:layout="http://www.webratio.com/2006/WebML/Layout" id="sv3#area4#page18" name="Alterar Passadeira" linkOrder="sv3#area4#page18#ln34" landmark="false" protected="false" gr:x="385" gr:y="70">
+  <ContentUnits>
+    <DataUnit id="sv3#area4#page18#dau5" name="Passadeira" gr:x="0" gr:y="0" entity="ent2" displayAll="true">
+      <Selector id="sv3#area4#page18#dau5#su17" defaultPolicy="fill" booleanOperator="and">
+        <KeyCondition id="sv3#area4#page18#dau5#su17#kcond8" name="KeyCondition9" predicate="in" implied="false"/>
+      </Selector>
+      <Link id="sv3#area4#page18#dau5#ln32" name="Flow20" to="sv3#area4#page18#enu4" type="transport" validate="true">
+        <LinkParameter id="sv3#area4#page18#dau5#ln32#par33" name="latitude_Latitude" source="data.ent2#att6" target="sv3#area4#page18#enu4#fld7_slot"/>
+        <LinkParameter id="sv3#area4#page18#dau5#ln32#par34" name="oid_oid" source="data.ent2#att2" target="sv3#area4#page18#enu4#fld15_slot"/>
+        <LinkParameter id="sv3#area4#page18#dau5#ln32#par35" name="longitude_Longitude" source="data.ent2#att7" target="sv3#area4#page18#enu4#fld8_slot"/>
+        <LinkParameter id="sv3#area4#page18#dau5#ln32#par36" name="oid_Key Condition [oid]" source="data.ent2#att2" target="sv3#area4#page18#enu4.ent2#att2"/>
+      </Link>
+    </DataUnit>
+    <EntryUnit id="sv3#area4#page18#enu4" name="Editar Passadeira" linkOrder="sv3#area4#page18#enu4#ln33" gr:x="150" gr:y="20" entity="ent2">
+      <Field id="sv3#area4#page18#enu4#fld7" name="Latitude" type="float" modifiable="true" preloaded="true"/>
+      <Field id="sv3#area4#page18#enu4#fld8" name="Longitude" type="float" modifiable="true" preloaded="true"/>
+      <Field id="sv3#area4#page18#enu4#fld15" name="oid" type="string" modifiable="false" preloaded="true"/>
+      <Link id="sv3#area4#page18#enu4#ln33" name="Confirmar" to="sv3#area4#miu11" type="normal" validate="true">
+        <LinkParameter id="sv3#area4#page18#enu4#ln33#par49" name="Latitude_latitude" source="sv3#area4#page18#enu4#fld7" target="sv3#area4#miu11.mov1#opm9#icu12#icp17"/>
+        <LinkParameter id="sv3#area4#page18#enu4#ln33#par50" name="Longitude_longitude" source="sv3#area4#page18#enu4#fld8" target="sv3#area4#miu11.mov1#opm9#icu12#icp16"/>
+        <LinkParameter id="sv3#area4#page18#enu4#ln33#par51" name="oid_oid" source="sv3#area4#page18#enu4#fld15" target="sv3#area4#miu11.mov1#opm9#icu12#icp18"/>
+      </Link>
+    </EntryUnit>
+  </ContentUnits>
+  <layout:Grid containerType="grid">
+    <layout:Row>
+      <layout:Cell colspan="12">
+        <layout:Unit unitId="sv3#area4#page18#dau5">
+          <layout:Attribute attribute="ent2#att6"/>
+          <layout:Attribute attribute="ent2#att7"/>
+          <layout:Attribute attribute="ent2#att11"/>
+          <layout:Attribute attribute="ent2#att12"/>
+          <layout:Attribute attribute="ent2#att13"/>
+        </layout:Unit>
+      </layout:Cell>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+    </layout:Row>
+    <layout:Row>
+      <layout:Cell colspan="12">
+        <layout:Unit unitId="sv3#area4#page18#enu4">
+          <layout:Field field="sv3#area4#page18#enu4#fld7"/>
+          <layout:Field field="sv3#area4#page18#enu4#fld8"/>
+          <layout:Field field="sv3#area4#page18#enu4#fld15"/>
+          <layout:Link link="sv3#area4#page18#enu4#ln33"/>
+        </layout:Unit>
+      </layout:Cell>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+    </layout:Row>
+  </layout:Grid>
+  <Link id="sv3#area4#page18#ln34" name="Voltar" to="sv3#area4#page16" type="normal" automaticCoupling="true" validate="true"/>
+</Page>

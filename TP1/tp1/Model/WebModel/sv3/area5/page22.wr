@@ -1,0 +1,58 @@
+<Page xmlns:gr="http://www.webratio.com/2006/WebML/Graph" xmlns:layout="http://www.webratio.com/2006/WebML/Layout" id="sv3#area5#page22" name="Registar Veiculo" landmark="true" gr:x="655" gr:y="220">
+  <ContentUnits>
+    <EntryUnit id="sv3#area5#page22#enu10" name="New Veiculo" linkOrder="sv3#area5#page22#enu10#ln45" gr:x="0" gr:y="15" entity="ent3">
+      <Link id="sv3#area5#page22#enu10#ln45" name="Confirmar" to="sv3#miu13" type="normal" validate="true">
+        <LinkParameter id="sv3#area5#page22#enu10#ln45#par80" name="Latitude_latitude" source="sv3#area5#page22#enu10#fld24" target="sv3#miu13.mov3#opm5#icu7#icp8"/>
+        <LinkParameter id="sv3#area5#page22#enu10#ln45#par81" name="Longitude_longitude" source="sv3#area5#page22#enu10#fld25" target="sv3#miu13.mov3#opm5#icu7#icp7"/>
+      </Link>
+      <Field id="sv3#area5#page22#enu10#fld24" name="Latitude" type="float" modifiable="true"/>
+      <Field id="sv3#area5#page22#enu10#fld25" name="Longitude" type="float" modifiable="true"/>
+    </EntryUnit>
+    <DataUnit id="sv3#area5#page22#dau12" name="Veiculo Adicionado" gr:x="120" gr:y="0" entity="ent3" displayAll="true">
+      <Selector id="sv3#area5#page22#dau12#su22" defaultPolicy="fill" booleanOperator="and">
+        <KeyCondition id="sv3#area5#page22#dau12#su22#kcond18" name="KeyCondition1" predicate="in" implied="false"/>
+      </Selector>
+    </DataUnit>
+  </ContentUnits>
+  <layout:Grid containerType="grid">
+    <layout:Row>
+      <layout:Cell colspan="12">
+        <layout:Unit unitId="sv3#area5#page22#enu10">
+          <layout:Link link="sv3#area5#page22#enu10#ln45"/>
+          <layout:Field field="sv3#area5#page22#enu10#fld24"/>
+          <layout:Field field="sv3#area5#page22#enu10#fld25"/>
+        </layout:Unit>
+      </layout:Cell>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+    </layout:Row>
+    <layout:Row>
+      <layout:Cell colspan="12">
+        <layout:Unit unitId="sv3#area5#page22#dau12">
+          <layout:Attribute attribute="ent3#att9"/>
+          <layout:Attribute attribute="ent3#att10"/>
+        </layout:Unit>
+      </layout:Cell>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+    </layout:Row>
+  </layout:Grid>
+</Page>
