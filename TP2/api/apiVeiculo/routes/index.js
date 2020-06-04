@@ -1,24 +1,35 @@
 var express = require('express');
 var router = express.Router();
+var Veiculos = require('../controllers/veiculo.js')
 
 router.get('/veiculos', function(req, res, next) {
-  res.jsonp(1)
+  Veiculos.listar(req.params.id,req.body)
+  .then(dados =>{res.jsonp(dados)})
+  .catch(erro => res.write(erro))
 });
 
 router.get('/veiculos/:id', function(req, res, next) {
-  res.jsonp(1)
+  Veiculos.get(req.params.id)
+  .then(dados =>{res.jsonp(dados)})
+  .catch(erro => res.write(erro))
 });
 
 router.post('/veiculo', function(req, res, next) {
-  res.jsonp(1)
+  Veiculos.create(req.body)
+  .then(dados =>{res.jsonp(dados)})
+  .catch(erro => res.write(erro))
 });
 
 router.put('/veiculos/:id', function(req, res, next) {
-  res.jsonp(1)
+  Veiculos.update(req.params.id,req.body)
+  .then(dados =>{res.jsonp(dados)})
+  .catch(erro => res.write(erro))
 });
 
 router.delete('/veiculos/:id', function(req, res, next) {
-  res.jsonp(1)
+  Veiculos.remove(req.params.id)
+  .then(dados =>{res.jsonp(dados)})
+  .catch(erro => res.write(erro))
 });
 
 module.exports = router;
