@@ -14,7 +14,7 @@ router.get('/pedestres/:id', function(req, res, next) {
   .catch(erro => res.write(erro))
 });
 
-router.post('/pedestre', function(req, res, next) {
+router.post('/pedestres', function(req, res, next) {
   Pedestres.createPedestre(req.body)
   .then(dados =>{res.jsonp(dados)})
   .catch(erro => res.write(erro))

@@ -14,7 +14,7 @@ router.get('/veiculos/:id', function(req, res, next) {
   .catch(erro => res.write(erro))
 });
 
-router.post('/veiculo', function(req, res, next) {
+router.post('/veiculos', function(req, res, next) {
   Veiculos.create(req.body)
   .then(dados =>{res.jsonp(dados)})
   .catch(erro => res.write(erro))
