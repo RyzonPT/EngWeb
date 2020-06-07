@@ -3,24 +3,37 @@ var router = express.Router();
 var axios = require('axios')
 var geolib = require('geolib')
 var Passadeiras = require('../controllers/passadeira')
-var apiLayer = 'http://localhost:4000/'
+var apiLayer = 'http://localhost:3052/'
 
+getSemaforo = function(pedestres){
+  return new Promise(function(resolve, reject) {
+    if(pedestres.length == 0){
+      resolve({semaforo: 'verde'})
+    }
+    else{
+      resolve({semaforo: 'vermelho'})
+    }
+  })
+}
 
 // recebe o veiculo ou pedestre e as passsadeiras
 getPassadeiraProxima = function(passadeiras, utilizador){
   return new Promise(function(resolve, reject) {
-    var result
+    var result = null
     var length = passadeiras.length;
     var i = 0;
     var distance = Number.MAX_SAFE_INTEGER
+    console.log(passadeiras)
+    console.log(utilizador)
     passadeiras.forEach(pass => {
+        console.log(pass)
         var distanceAtual = geolib.getDistance(utilizador, pass)
         if(distanceAtual < 5 && distanceAtual < distance ) {distance = distanceAtual; result = pass}
-        console.log(result)
         ++i;
-        if(i == length) { console.log(result) ; resolve(result)}
+        if(i == length) { console.log(result) ; resolve( result)}
     })
   })
+
 } 
 
 
@@ -32,38 +45,53 @@ proximityCalculator = function(passadeira, utilizadores){
       
       utilizadores.forEach(u =>{
           var distance = geolib.getDistance(passadeira, u)
-          if(distance < 5) result.push(u) 
+          if(distance < 5){ result.push(u) }
           i++;
           if(i == length) resolve(result)
       })
   })
 }
 
-router.get('/passadeiras/veiculos', function(req, res, next) {
+
+router.get('/passadeiras/veiculos/:latitude/:longitude', function(req, res, next) {
   var veiculo = {
-    latitude : req.body.latitude,
-    longitude : req.body.longitude
+    latitude : req.params.latitude,
+    longitude : req.params.longitude
   }
   var response = res
+  
   Passadeiras.listar()
     .then(passadeiras =>{
       axios.get(apiLayer + 'pedestres')
                      .then(pedestres => {
                        getPassadeiraProxima(passadeiras, veiculo)
                         .then(passadeira => {
-                          console.log("r" + passadeira)
-                          proximityCalculator(passadeira, pedestres.data)
-                          .then(result => {
-                            response.jsonp(result)
-                          })
-                          .catch(error=> response.status(500).jsonp(error))
+
+                          if(passadeira == null){
+                            res.jsonp({semaforo:'verde'})
+                          }
+                          else{
+                            proximityCalculator(passadeira, pedestres.data)
+                            .then(pedestresPassadeira => {
+
+                              //console.log(pedestresPassadeira)
+                              getSemaforo(pedestresPassadeira)
+                              .then(result=>{
+                                console.log(result)
+                                response.jsonp(result)
+                              })
+                              .catch(error => response.status(500).jsonp(error))
+
+                            })
+                            .catch(error=> response.status(500).jsonp(error))
+                          }
                         })
                      })
                      .catch(error => response.status(500).jsonp(error))
     })
     .catch(erro => response.write(erro))
 })
-
+/*
 router.get('/passadeiras/pedestres', function(req, res, next) {
   var pedestre = {
     latitude : req.body.latitude,
@@ -86,7 +114,7 @@ router.get('/passadeiras/pedestres', function(req, res, next) {
                      .catch(error => response.status(500).jsonp(error))
     })
     .catch(erro => response.write(erro))
-})
+})*/
 
 /* GET Passadeiras. */
 router.get('/passadeiras', function(req, res, next) {

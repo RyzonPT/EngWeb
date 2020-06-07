@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var Veiculos = require('../controllers/veiculo.js')
 
+var axios = require('axios')
+
 router.get('/veiculos', function(req, res, next) {
   Veiculos.listar(req.params.id,req.body)
   .then(dados =>{res.jsonp(dados)})
@@ -21,9 +23,12 @@ router.post('/veiculos', function(req, res, next) {
 });
 
 router.put('/veiculos/:id', function(req, res, next) {
-  Veiculos.update(req.params.id,req.body)
-  .then(dados =>{res.jsonp(dados)})
-  .catch(erro => res.write(erro))
+  Promise.all([
+    Veiculos.update(req.params.id, req.body),
+    axios.post('http://localhost:3050/historico/' + 'veiculo', {idVeiculo: req.params.id, latitude: req.body.latitude, longitude: req.body.longitude})
+  ])     
+    .then(([a,b]) => {res.jsonp({Sucess :  true})} )
+    .catch(([e1, e2]) => res.jsonp('error'))
 });
 
 router.delete('/veiculos/:id', function(req, res, next) {
