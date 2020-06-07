@@ -3,6 +3,7 @@ console.log("TESTE")
 var mapa = [
   {
     id:1,
+    estado = 1,
     coords:[
       [41.553504, -8.406679],
       [41.555113, -8.406965],
@@ -23,6 +24,7 @@ var mapa = [
     ]
   },{
     id:2,
+    estado = 1,
     coords:[
       [41.553504, -8.406679],
       [41.555113, -8.406965],
@@ -33,6 +35,7 @@ var mapa = [
     ]
   },{
     id:3,
+    estado = 1,
     coords:[
       [41.553504, -8.406679],
       [41.555113, -8.406965],
@@ -43,6 +46,7 @@ var mapa = [
     ]
   },{
     id:4,
+    estado = 1,
     coords:[
       [41.553504, -8.406679],
       [41.555113, -8.406965],
@@ -69,6 +73,7 @@ async function putCoord(coord,id){
      res = await axios.put("http://localhost:4000/veiculos/"+id,{latitude:coord[0],longitude:coord[1]});
 
     const todos = res.data;
+    coord.estado = 1; /// res.data
 
     console.log("PONTO A");
 
@@ -83,6 +88,7 @@ function sendCoords(){
   mapa.forEach(c =>{
     if(indices[aux]<c.coords.length){
       putCoord(c.coords[indices[aux]],c.id)
+      if(c.coords[indices[aux]].estado == 1)
       indices[aux]++;
     }
     else{
@@ -105,8 +111,7 @@ function updateTable(){
         var x = indices[index]
         if(x>= e.coords.length) 
         x = x -1;
-        console.log(e.coords)
-        console.log(indices[index])
+
         $("#tbody").append(`
         <tr>
       <td>

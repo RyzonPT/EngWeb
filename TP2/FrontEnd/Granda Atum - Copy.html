@@ -20,33 +20,25 @@
 
 
   <script>
-var position =[41.553504, -8.406679];
-var position2 =[41.553504, -8.406679];
+
 
 function initialize() { 
-    var latlng = new google.maps.LatLng(position[0], position[1]);
+    var latlng = new google.maps.LatLng(41.553504, -8.406679);
     var myOptions = {
         zoom: 16,
         center: latlng,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     map = new google.maps.Map(document.getElementById("mapCanvas"), myOptions);
-
+/*
     marker = new google.maps.Marker({
         position: latlng,
         map: map,
     	icon: 'carro3.png',
-        title: "Latitude:"+position[0]+" | Longitude:"+position[1],
+        title: "Latitude:"+41.553504+" | Longitude:"+-8.406679,
         rotation:"bearing"
     });
-
-    marker2 = new google.maps.Marker({
-        position: latlng,
-        map: map,
-    	icon: 'carro3.png',
-        title: "Latitude:"+position[0]+" | Longitude:"+position[1],
-        rotation:"bearing"
-    });
+*/
 
     google.maps.event.addListener(map, 'click', function(event) {
         var result = [event.latLng.lat(), event.latLng.lng()];
@@ -58,101 +50,191 @@ function initialize() {
 google.maps.event.addDomListener(window, 'load', initialize);
 
 
-var numDeltas = 200;
+var numDeltas = 300;
 var delay = 10; //milliseconds
-var i = 0;
-var deltaLat;
-var deltaLng;
-var deltaLat2;
-var deltaLng2;
+var oldVeiculos= []; // = [{id:1,latidutede:4234234, longitude:23432432, delta.lat: , deltalong:, i, marker}]
+var newVeiculos = [];
 
-function transition(result){
-    i = 0;
-    console.log(result[0])
-    deltaLat = (result[0] - position[0])/numDeltas;
-    deltaLng = (result[1] - position[1])/numDeltas;
-    moveMarker();
+var oldPedestres= []; 
+var newPedestres = [];
+
+
+function findVeiculo(veiculos,id){
+  var result = null;
+  veiculos.forEach(e =>{
+    if(e.idVeiculo == id) { 
+      result = e;
+    }
+  })
+ return result
+
 }
 
-function transition2(result){
-    i = 0;
-    console.log(result[0])
-    deltaLat2 = (result[0] - position2[0])/numDeltas;
-    deltaLng2 = (result[1] - position2[1])/numDeltas;
-    moveMarker2();
+
+
+function refreshVeiculos(){
+    newVeiculos.forEach(newV =>{
+     // console.log(newV)
+        var oldV = findVeiculo(oldVeiculos,newV.idVeiculo);
+       // console.log("OLDV")
+       // console.log(oldV)
+
+        if( oldV == null){
+                newV.marker = new google.maps.Marker({
+                position: new google.maps.LatLng(newV.latitude, newV.longitude),
+                map: map,
+                icon: 'carro3.png',
+                title: "Latitude:"+newV.latitude+" | Longitude:"+newV.longitude,
+                rotation:"bearing"
+            });
+            oldVeiculos.push(newV)
+        }
+    })
 }
 
-var index = 0;
-var coords = [[41.553504, -8.406679],
-[41.555113, -8.406965],
-[41.557052, -8.407179],
-[41.558449, -8.407323],
-[41.560020, -8.407254],
-[41.560460, -8.405929]]
+
+
+function refreshPedestres(){
+    newPedestres.forEach(newP =>{
+     // console.log(newV)
+        var oldP = findVeiculo(oldPedestres,newP.idPedestre);
+       // console.log("OLDV")
+       // console.log(oldV)
+
+        if( oldP == null){
+                newV.marker = new google.maps.Marker({
+                position: new google.maps.LatLng(newP.latitude, newP.longitude),
+                map: map,
+                icon: 'carro3.png',
+                title: "Latitude:"+newP.latitude+" | Longitude:"+newP.longitude,
+                rotation:"bearing"
+            });
+            oldPedestres.push(newP)
+        }
+    })
+}
+
+
+async function getVeiculo(){
+    try {
+      console.log("FACER PEDIDO")
+      axios.get("http://localhost:4000/veiculos/")
+      .then(dados =>{
+        console.log("CHEGOU PEDIDO")
+        newVeiculos = dados.data
+        refreshVeiculos()
+      transition()
+      })
+      
+    } catch (e) {
+      console.error(e);
+    }
+};
+
+
+async function getPedestre(){
+    try {
+      axios.get("http://localhost:4000/pedestres/")
+      .then(dados =>{
+        newPedestres = dados.data
+        refreshPedestres()
+      transition2()
+      })
+      
+    } catch (e) {
+      console.error(e);
+    }
+};
+
+
+function initPassadeiras(passadeiras){
+  //console.log(passadeiras)
+    passadeiras.forEach(p =>{
+      console.log(p)
+                marker  = new google.maps.Marker({
+                position: new google.maps.LatLng(p.latitude, p.longitude),
+                map: map,
+                icon: 'passadeira.png',
+                title: "Latitude:"+p.latitude+" | Longitude:"+p.longitude,
+    })
+  })
+}
+
+
+async function getPassadeiras(){
+    try {
+      axios.get("http://localhost:4000/passadeiras")
+      .then(dados =>{
+        
+        initPassadeiras(dados.data)
+      })
+      
+    } catch (e) {
+      console.error(e);
+    }
+};
+
+getPassadeiras();
+
+function transition(){
+       // console.log(oldVeiculos)
+      //  console.log(newVeiculos)
+    oldVeiculos.forEach(oldV =>{
+
+     //   console.log(oldV.id)
+        newV = findVeiculo(newVeiculos,oldV.idVeiculo)
+        
+        if(newV != null){
+          
+          oldV.deltaLat = (newV.latitude - oldV.latitude)/numDeltas;
+          oldV.deltaLng = (newV.longitude - oldV.longitude)/numDeltas;
+          oldV.i = 0;
+         // console.log(oldV)
+          moveMarker(oldV);
+        }
+    })
+
+}
+
+
+function transition(){
+       // console.log(oldVeiculos)
+      //  console.log(newVeiculos)
+    oldPedestres.forEach(oldP =>{
+
+     //   console.log(oldV.id)
+        newP = findVeiculo(newPedestres,oldP.idPedestre)
+        
+        if(newV != null){
+          
+          oldP.deltaLat = (newP.latitude - newP.latitude)/numDeltas;
+          oldP.deltaLng = (newP.longitude - newP.longitude)/numDeltas;
+          oldP.i = 0;
+         // console.log(oldV)
+          moveMarker(oldP);
+        }
+    })
+
+}
+
 
 
 setInterval(getVeiculo,2000)
 
-async function getVeiculo(){
-  try {
-     res = await axios.get("http://localhost:4000/veiculos/1");
-
-    transition([res.data[0].latitude,res.data[0].longitude])
 
 
-  } catch (e) {
-    console.error(e);
-  }
-  try {
-     res = await axios.get("http://localhost:4000/veiculos/3");
-
-    transition2([res.data[0].latitude,res.data[0].longitude])
-
-    return res.data;
-  } catch (e) {
-    console.error(e);
-  }
-};
-
-async function getVeiculo2(){
-  try {
-     res = await axios.get("http://localhost:4000/veiculos/3");
-
-    transition2([res.data[0].latitude,res.data[0].longitude])
-
-    return res.data;
-  } catch (e) {
-    console.error(e);
-  }
-};
-
-
-function moveMarker(coord){
-    position[0] += deltaLat;
-    position[1] += deltaLng;
-    var latlng = new google.maps.LatLng(position[0], position[1]);
-    marker.setTitle("Latitude:"+position[0]+" | Longitude:"+position[1]);
-    marker.setPosition(latlng);
-    if(i!=numDeltas){
-        i++;
-        
-        setTimeout(moveMarker, delay);
+function moveMarker(oldV){
+    oldV.latitude += oldV.deltaLat;
+    oldV.longitude += oldV.deltaLng;
+    var latlng = new google.maps.LatLng(oldV.latitude, oldV.longitude);
+    oldV.marker.setTitle("Latitude:"+oldV.latitude+" | Longitude:"+oldV.longitude);
+    oldV.marker.setPosition(latlng);
+    if(oldV.i!=numDeltas){
+        oldV.i++;
+        setTimeout(function (){moveMarker(oldV)},delay);
     }
 }
 
-
-function moveMarker2(coord){
-    position2[0] += deltaLat2;
-    position2[1] += deltaLng2;
-    var latlng = new google.maps.LatLng(position2[0], position2[1]);
-    marker2.setTitle("Latitude:"+position2[0]+" | Longitude:"+position2[1]);
-    marker2.setPosition(latlng);
-    if(i!=numDeltas){
-        i++;
-        
-        setTimeout(moveMarker2, delay);
-    }
-}
 </script>
 </html>
 
