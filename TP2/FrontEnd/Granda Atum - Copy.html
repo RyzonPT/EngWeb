@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+<script src="https://maps.googleapis.com/maps/api/js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+#mapCanvas{
+    width: 100%;
+    height: 800px;
+}
+    </style>
+  </head>
+  <body>
+    <div id="mapCanvas"></div>
+  </body>
+
+
+
+  <script>
+var position =[41.553504, -8.406679];
+var position2 =[41.553504, -8.406679];
+
+function initialize() { 
+    var latlng = new google.maps.LatLng(position[0], position[1]);
+    var myOptions = {
+        zoom: 16,
+        center: latlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    map = new google.maps.Map(document.getElementById("mapCanvas"), myOptions);
+
+    marker = new google.maps.Marker({
+        position: latlng,
+        map: map,
+    	icon: 'carro3.png',
+        title: "Latitude:"+position[0]+" | Longitude:"+position[1],
+        rotation:"bearing"
+    });
+
+    marker2 = new google.maps.Marker({
+        position: latlng,
+        map: map,
+    	icon: 'carro3.png',
+        title: "Latitude:"+position[0]+" | Longitude:"+position[1],
+        rotation:"bearing"
+    });
+
+    google.maps.event.addListener(map, 'click', function(event) {
+        var result = [event.latLng.lat(), event.latLng.lng()];
+        transition(result);
+    });
+}
+
+//Load google map
+google.maps.event.addDomListener(window, 'load', initialize);
+
+
+var numDeltas = 200;
+var delay = 10; //milliseconds
+var i = 0;
+var deltaLat;
+var deltaLng;
+var deltaLat2;
+var deltaLng2;
+
+function transition(result){
+    i = 0;
+    console.log(result[0])
+    deltaLat = (result[0] - position[0])/numDeltas;
+    deltaLng = (result[1] - position[1])/numDeltas;
+    moveMarker();
+}
+
+function transition2(result){
+    i = 0;
+    console.log(result[0])
+    deltaLat2 = (result[0] - position2[0])/numDeltas;
+    deltaLng2 = (result[1] - position2[1])/numDeltas;
+    moveMarker2();
+}
+
+var index = 0;
+var coords = [[41.553504, -8.406679],
+[41.555113, -8.406965],
+[41.557052, -8.407179],
+[41.558449, -8.407323],
+[41.560020, -8.407254],
+[41.560460, -8.405929]]
+
+
+setInterval(getVeiculo,2000)
+
+async function getVeiculo(){
+  try {
+     res = await axios.get("http://localhost:4000/veiculos/1");
+
+    transition([res.data[0].latitude,res.data[0].longitude])
+
+
+  } catch (e) {
+    console.error(e);
+  }
+  try {
+     res = await axios.get("http://localhost:4000/veiculos/3");
+
+    transition2([res.data[0].latitude,res.data[0].longitude])
+
+    return res.data;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+async function getVeiculo2(){
+  try {
+     res = await axios.get("http://localhost:4000/veiculos/3");
+
+    transition2([res.data[0].latitude,res.data[0].longitude])
+
+    return res.data;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+
+function moveMarker(coord){
+    position[0] += deltaLat;
+    position[1] += deltaLng;
+    var latlng = new google.maps.LatLng(position[0], position[1]);
+    marker.setTitle("Latitude:"+position[0]+" | Longitude:"+position[1]);
+    marker.setPosition(latlng);
+    if(i!=numDeltas){
+        i++;
+        
+        setTimeout(moveMarker, delay);
+    }
+}
+
+
+function moveMarker2(coord){
+    position2[0] += deltaLat2;
+    position2[1] += deltaLng2;
+    var latlng = new google.maps.LatLng(position2[0], position2[1]);
+    marker2.setTitle("Latitude:"+position2[0]+" | Longitude:"+position2[1]);
+    marker2.setPosition(latlng);
+    if(i!=numDeltas){
+        i++;
+        
+        setTimeout(moveMarker2, delay);
+    }
+}
+</script>
+</html>
+

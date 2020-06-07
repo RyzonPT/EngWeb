@@ -9,6 +9,14 @@ var passadeiraRouter = require('./routes/passadeiras');
 var historicoRouter = require('./routes/historico');
 
 var app = express();
+var cors = require('cors')
+const corsOpts = {
+    origin: '*',
+    credentials: true,
+    methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Accept', 'Authorization', 'Cache-Control', 'Content-Type', 'DNT', 'If-Modified-Since', 'Keep-Alive', 'Origin', 'User-Agent', 'X-Requested-With', 'Content-Length']
+}
+app.use(cors(corsOpts))
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
