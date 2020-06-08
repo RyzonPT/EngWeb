@@ -142,4 +142,78 @@ router.delete('/passadeiras/:id', function(req, res, next) {
 });
 
 
+router.get('/passadeiras', function(req, res, next) {
+  Passadeiras.listar()
+    .then(dados =>{res.jsonp(dados)})
+    .catch(erro => res.write(erro))
+});
+
+router.get('/passadeiras/:id', function(req, res, next) {
+  Passadeiras.get(req.params.id)
+    .then(dados =>{res.jsonp(dados)})
+    .catch(erro => res.write(erro))
+});
+
+router.post('/passadeiras', function(req, res, next) {
+  Passadeiras.create(req.body)
+    .then(dados =>{res.jsonp(dados)})
+    .catch(erro => res.write(erro))
+});
+
+router.put('/passadeiras/:id', function(req, res, next) {
+  Passadeiras.update(req.params.id, req.body)
+    .then(dados =>{res.jsonp(dados)})
+    .catch(erro => res.write(erro))
+});
+
+router.delete('/passadeiras/:id', function(req, res, next) {
+  Passadeiras.remove(req.params.id)
+    .then(dados =>{res.jsonp(dados)})
+    .catch(erro => res.write(erro))
+});
+
+
+//////////////// Passadeiras Pedestres
+
+router.post('/passadeiraspedestres', function(req, res, next) {
+  Passadeiras.create(req.body)
+    .then(dados =>{res.jsonp(dados)})
+    .catch(erro => res.write(erro))
+});
+
+router.get('/passadeiraspedestres', function(req, res, next) {
+  Passadeiras.getAllPassadeiraPedestre()
+    .then(dados =>{res.jsonp(dados)})
+    .catch(erro => res.write(erro))
+});
+
+
+router.delete('/passadeiraspedestres', function(req, res, next) {
+  Passadeiras.remove(req.body)
+    .then(dados =>{res.jsonp(dados)})
+    .catch(erro => res.write(erro))
+});
+
+
+/////////////// Passadeiras Veiculos
+
+router.post('/passadeirasveiculos', function(req, res, next) {
+  Passadeiras.create(req.body)
+    .then(dados =>{res.jsonp(dados)})
+    .catch(erro => res.write(erro))
+});
+
+router.get('/passadeirasveiculos', function(req, res, next) {
+  Passadeiras.getAllPassadeiraVeiculo()
+    .then(dados =>{res.jsonp(dados)})
+    .catch(erro => res.write(erro))
+});
+
+
+router.delete('/passadeirasveiculos', function(req, res, next) {
+  Passadeiras.remove(req.body)
+    .then(dados =>{res.jsonp(dados)})
+    .catch(erro => res.write(erro))
+});
+
 module.exports = router;

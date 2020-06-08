@@ -82,4 +82,101 @@ Passadeira.remove = function(id){
     })
 };
 
+//////////////////////////////  Passadeira pedestre
+
+
+Passadeira.createPassadeiraPedestre = function(p){
+    return new Promise(function(resolve, reject) {
+        sql.query("INSERT INTO passadeirapedestre (idpassadeira,idpedestre) values (?,?)", [p.idpassadeira,p.idpedestre], function (err, res) {
+                
+                if(err) {
+                    console.log("error: ", err);
+                    reject(err);
+                }
+                else{
+                    console.log(res.insertId);
+                    resolve(res);
+                }
+            });   
+        })   
+}
+
+Passadeira.getAllPassadeiraPedestre = function (){
+    return new Promise(function(resolve, reject) {
+     sql.query("Select * from passadeirapedestre", function (err, res) {
+             if(err) {
+                 console.log("error: ", err);
+                 reject(err);
+             }
+             else{
+               resolve(res);
+             }
+         });   
+     })
+ }
+
+ Passadeira.removePassadeiraPedestre = function(p){
+    return new Promise(function(resolve, reject) {
+ sql.query("DELETE FROM passadeirapedestre WHERE idPassadeira = ? AND idPedestre = ?", [p.idpassadeira, p.idpedestre], function (err, res) {
+
+            if(err) {
+                console.log("error: ", err);
+                reject(err);
+            }
+            else{
+           
+                resolve(res);
+            }
+        });   
+    })
+};
+
+////////////////////////////////// Passadeira Veiculo
+
+Passadeira.createPassadeiraVeiculo = function(p){
+    return new Promise(function(resolve, reject) {
+        sql.query("INSERT INTO passadeiraveiculo (idPassadeira,idVeiculo) values (?,?)", [p.idpassadeira,p.idveiculo], function (err, res) {
+                
+                if(err) {
+                    console.log("error: ", err);
+                    reject(err);
+                }
+                else{
+                    console.log(res.insertId);
+                    resolve(res);
+                }
+            });   
+        })   
+}
+
+Passadeira.getAllPassadeiraVeiculo = function (){
+    return new Promise(function(resolve, reject) {
+     sql.query("Select * from passadeiraveiculo", function (err, res) {
+             if(err) {
+                 console.log("error: ", err);
+                 reject(err);
+             }
+             else{
+               resolve(res);
+             }
+         });   
+     })
+ }
+
+ Passadeira.removePassadeiraVeiculo = function(p){
+    return new Promise(function(resolve, reject) {
+ sql.query("DELETE FROM passadeiraveiculo WHERE idPassadeira = ? AND idVeiculo = ?", [p.idpassadeira, p.idveiculo], function (err, res) {
+
+            if(err) {
+                console.log("error: ", err);
+                reject(err);
+            }
+            else{
+           
+                resolve(res);
+            }
+        });   
+    })
+};
+
 module.exports= Passadeira;
