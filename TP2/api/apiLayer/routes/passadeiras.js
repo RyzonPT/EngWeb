@@ -33,7 +33,7 @@ router.put('/:id', function(req, res, next) {
 });
 
 router.delete('/:id', function(req, res, next) {
-    axios.remove(apiPassadeira)
+    axios.delete(apiPassadeira + req.params.id)
     .then(dados => res.jsonp(dados.data))
     .catch(error => res.status(500).jsonp(error) )
 });
