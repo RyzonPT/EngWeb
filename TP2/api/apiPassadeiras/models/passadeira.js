@@ -15,7 +15,6 @@ Passadeira.create = function (p) {
                 reject(err);
             }
             else{
-                console.log(res.insertId);
                 resolve(res);
             }
         });   

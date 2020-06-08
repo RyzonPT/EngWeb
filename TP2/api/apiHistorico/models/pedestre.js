@@ -5,6 +5,7 @@ var pedestreSchema = new Schema({
     idPedestre: {type: Number},
     latitude : {type : Number},
     longitude : {type: Number},
+    idPassadeira: {type: Number},
     data : {type: Date}
 })
 

@@ -24,9 +24,10 @@ router.post('/pedestres', function(req, res, next) {
 
 
 router.put('/pedestres/:id', function(req, res, next) {
-
+  var pedestre = req.body
+  pedestre.idPedestre = req.params.id
   Promise.all([Pedestres.updatePedestre(req.params.id, req.body),
-               axios.post('http://localhost:3050/historico/' + 'pedestre', {idPedestre: req.params.id, latitude: req.body.latitude, longitude: req.body.longitude})])
+               axios.post('http://localhost:3050/historico/' + 'pedestre', pedestre)])
          .then(([a, b]) => res.jsonp({Sucess :  true}) )
          .catch(([e1,e2]) => res.status(500).jsonp('error'))
   

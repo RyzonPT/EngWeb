@@ -16,21 +16,18 @@ getSemaforo = function(pedestres){
   })
 }
 
-// recebe o veiculo ou pedestre e as passsadeiras
+// recebe o veiculo e as passsadeiras
 getPassadeiraProxima = function(passadeiras, utilizador){
   return new Promise(function(resolve, reject) {
     var result = null
     var length = passadeiras.length;
     var i = 0;
     var distance = Number.MAX_SAFE_INTEGER
-    console.log(passadeiras)
-    console.log(utilizador)
     passadeiras.forEach(pass => {
-        console.log(pass)
         var distanceAtual = geolib.getDistance(utilizador, pass)
         if(distanceAtual < 50 && distanceAtual < distance ) {distance = distanceAtual; result = pass}
         ++i;
-        if(i == length) { console.log(result) ; resolve( result)}
+        if(i == length) { resolve( result)}
     })
   })
 
@@ -66,7 +63,6 @@ router.get('/passadeiras/veiculos/:latitude/:longitude', function(req, res, next
                      .then(pedestres => {
                        getPassadeiraProxima(passadeiras, veiculo)
                         .then(passadeira => {
-
                           if(passadeira == null){
                             res.jsonp({semaforo:1})
                           }
@@ -74,10 +70,8 @@ router.get('/passadeiras/veiculos/:latitude/:longitude', function(req, res, next
                             proximityCalculator(passadeira, pedestres.data)
                             .then(pedestresPassadeira => {
 
-                              //console.log(pedestresPassadeira)
                               getSemaforo(pedestresPassadeira)
                               .then(result=>{
-                                console.log(result)
                                 response.jsonp(result)
                               })
                               .catch(error => response.status(500).jsonp(error))
