@@ -31,7 +31,7 @@ router.get('/:id', function(req, res, next) {
   });
   
   router.delete('/:id', function(req, res, next) {
-    axios.get(apiPedestres + req.params.id)
+    axios.delete(apiPedestres + req.params.id)
         .then(dados => res.jsonp(dados.data))
         .catch(error => res.status(500).jsonp(error) )
   });

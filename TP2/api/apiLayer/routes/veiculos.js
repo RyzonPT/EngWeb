@@ -28,25 +28,14 @@ router.get('/:id', function(req, res, next) {
   });
   
   router.put('/:id', function(req, res, next) {
-    /*Promise.all([axios.get(apiPassadeira + 'veiculos/' + req.body.latitude + '/' + req.body.longitude),
-                 axios.put(apiVeiculo + req.params.id, req.body)])
-    .then(([semaforo, veiculo]) => {res.jsonp(semaforo)})
-    .catch(([e1, e2]) => {res.status(500).jsonp('erro')})   */
-    
-    axios.get(apiPassadeira + 'veiculos/' + req.body.latitude + '/' + req.body.longitude)
-         .then(semaforo =>{
-           console.log(semaforo)
-              axios.put(apiVeiculo + req.params.id, req.body)
-                   .then(() => { res.jsonp(semaforo.data)})
-                 .catch(error => res.status(500).jsonp(error) )
-            
-         })
-         .catch(error => res.status(500).jsonp(error))
-    
+  
+      axios.put(apiVeiculo + req.params.id, req.body)
+           .then(() => { res.jsonp(semaforo.data)})
+           .catch(error => res.status(500).jsonp(error) )
   });
   
   router.delete('/:id', function(req, res, next) {
-    axios.get(apiVeiculo + req.params.id)
+    axios.delete(apiVeiculo + req.params.id)
         .then(dados => res.jsonp(dados.data))
         .catch(error => res.status(500).jsonp(error) )
   });
