@@ -42,7 +42,28 @@ var mapa = [
   }
 ]
 
+
+
 var indices = []
+
+var passadeiras;
+
+async function getPassadeiras(){
+  try {
+     axios.get("http://localhost:4000/passadeiras")
+    .then(dados =>{
+      
+      //initPassadeiras(dados.data)
+      passadeiras = dados.data
+      console.log(passadeiras)
+    })
+    
+  } catch (e) {
+    console.error(e);
+  }
+};
+getPassadeiras();
+init();
 
 function init(){
   var aux = 0;
@@ -52,9 +73,10 @@ function init(){
   })
 }
 
-async function putCoord(coord,id){
+async function putCoord(coord,id,idPassadeira){
   try {
-     res = await axios.put("http://localhost:4000/pedestres/"+id,{latitude:coord[0],longitude:coord[1]});
+    console.log("ENTEI")
+     res = await axios.put("http://localhost:4000/pedestres/"+id,{latitude:coord[0],longitude:coord[1],idPassadeira: idPassadeira});
 
     const todos = res.data;
 
@@ -66,17 +88,17 @@ async function putCoord(coord,id){
   }
 };
 
+var dist;
 
-getPassadeiraProxima = function(passadeiras, utilizador){
+getPassadeiraProxima = function(coords){
+  console.log(coords)
     var result = null
-    var length = passadeiras.length;
     var i = 0;
     var distance = Number.MAX_SAFE_INTEGER
-    //console.log(passadeiras)
-    //console.log(utilizador)
     passadeiras.forEach(pass => {
-       // console.log(pass)
-        var distanceAtual = geolib.getDistance(utilizador, pass)
+        var distanceAtual = getDistance({lat:coords[0],lng:coords[1]}, {lat:pass.latitude,lng:pass.longitude})
+        console.log(distanceAtual)
+        dist = distanceAtual
         if(distanceAtual < 50 && distanceAtual < distance ) {distance = distanceAtual; result = pass}
     })
     return result;
@@ -85,10 +107,11 @@ getPassadeiraProxima = function(passadeiras, utilizador){
 function sendCoords(){
   var aux = 0;
   mapa.forEach(c =>{
-    var result = getPassadeiraProxima()
     if(indices[aux]<c.coords.length){
-      if(result!= null)
-        putCoord(c.coords[indices[aux]],c.id,)
+      var result = getPassadeiraProxima(c.coords[indices[aux]])
+      if(result!= null){
+        putCoord(c.coords[indices[aux]],c.id,result.idPassadeira)
+      }
       indices[aux]++;
     }
     else{
@@ -111,8 +134,6 @@ function updateTable(){
         var x = indices[index]
         if(x>= e.coords.length) 
         x = x -1;
-        console.log(e.coords)
-        console.log(indices[index])
         $("#tbody").append(`
         <tr>
       <td>
@@ -130,3 +151,21 @@ function updateTable(){
       })
 
 }
+
+
+
+var rad = function(x) {
+  return x * Math.PI / 180;
+};
+
+var getDistance = function(p1, p2) {
+  var R = 6378137; // Earth’s mean radius in meter
+  var dLat = rad(p2.lat - p1.lat);
+  var dLong = rad(p2.lng - p1.lng);
+  var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(rad(p1.lat)) * Math.cos(rad(p2.lat)) *
+    Math.sin(dLong / 2) * Math.sin(dLong / 2);
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  var d = R * c;
+  return d; // returns the distance in meter
+};

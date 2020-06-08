@@ -53,6 +53,23 @@ var mapa = [
 
 var indices = []
 
+
+async function getPassadeiras(){
+  try {
+     axios.get("http://localhost:4000/passadeiras")
+    .then(dados =>{
+      
+      //initPassadeiras(dados.data)
+      passadeiras = dados.data
+      console.log(passadeiras)
+    })
+    
+  } catch (e) {
+    console.error(e);
+  }
+};
+getPassadeiras();
+
 function init(){
   var aux = 0;
   mapa.forEach(e =>{
@@ -61,9 +78,9 @@ function init(){
   })
 }
 
-async function putCoord(coord,id){
+async function putCoord(coord,id,idPassadeira){
   try {
-     res = await axios.put("http://localhost:4000/veiculos/"+id,{latitude:coord[0],longitude:coord[1]});
+     res = await axios.put("http://localhost:4000/veiculos/"+id,{latitude:coord[0],longitude:coord[1],idPassadeira:idPassadeira,dist:dist});
 
     const todos = res.data;
     console.log(res.data)
@@ -78,13 +95,32 @@ async function putCoord(coord,id){
   }
 };
 
+var dist
+
+getPassadeiraProxima = function(coords){
+  console.log(coords)
+    var result = null
+    var i = 0;
+    var distance = Number.MAX_SAFE_INTEGER
+    passadeiras.forEach(pass => {
+        var distanceAtual = getDistance({lat:coords[0],lng:coords[1]}, {lat:pass.latitude,lng:pass.longitude})
+        console.log(distanceAtual)
+        dist = distanceAtual
+        if(distanceAtual < 50 && distanceAtual < distance ) {distance = distanceAtual; result = pass}
+    })
+    return result;
+} 
+
 function sendCoords(){
   var aux = 0;
   mapa.forEach(c =>{
     if(indices[aux]<c.coords.length){
-      putCoord(c.coords[indices[aux]],c.id)
-      if(c.coords[indices[aux]].estado == 1)
-      indices[aux]++;
+      var result = getPassadeiraProxima(c.coords[indices[aux]])
+      if(result!=null)
+        putCoord(c.coords[indices[aux]],c.id,result.idPassadeira)
+      if(c.estado == 1){
+        indices[aux]++;
+      }
     }
     else{
       indices[aux] = 0
@@ -122,5 +158,24 @@ function updateTable(){
     `)
     index ++;
       })
-
 }
+
+
+
+
+
+var rad = function(x) {
+  return x * Math.PI / 180;
+};
+
+var getDistance = function(p1, p2) {
+  var R = 6378137; // Earth’s mean radius in meter
+  var dLat = rad(p2.lat - p1.lat);
+  var dLong = rad(p2.lng - p1.lng);
+  var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(rad(p1.lat)) * Math.cos(rad(p2.lat)) *
+    Math.sin(dLong / 2) * Math.sin(dLong / 2);
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  var d = R * c;
+  return d; // returns the distance in meter
+};
