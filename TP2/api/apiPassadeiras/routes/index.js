@@ -23,14 +23,15 @@ getPassadeiraProxima = function(passadeiras, utilizador){
     var length = passadeiras.length;
     var i = 0;
     var distance = Number.MAX_SAFE_INTEGER
-    console.log(passadeiras)
-    console.log(utilizador)
+    //console.log(passadeiras)
+    //console.log(utilizador)
     passadeiras.forEach(pass => {
-        console.log(pass)
+       // console.log(pass)
         var distanceAtual = geolib.getDistance(utilizador, pass)
         if(distanceAtual < 50 && distanceAtual < distance ) {distance = distanceAtual; result = pass}
         ++i;
-        if(i == length) { console.log(result) ; resolve( result)}
+        if(i == length) { //console.log(result) ;
+           resolve( result)}
     })
   })
 

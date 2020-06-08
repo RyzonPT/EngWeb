@@ -1,0 +1,2 @@
+cd ../apiVeiculo
+npm start
