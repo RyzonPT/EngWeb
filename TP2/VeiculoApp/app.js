@@ -73,6 +73,7 @@ async function putCoord(coord,id){
 
     return todos;
   } catch (e) {
+    coord.estado = 0
     console.error(e);
   }
 };

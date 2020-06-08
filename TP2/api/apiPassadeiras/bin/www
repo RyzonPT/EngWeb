@@ -7,6 +7,9 @@
 var app = require('../app');
 var debug = require('debug')('apipassadeiras:server');
 var http = require('http');
+var estado = require('../models/estado');
+
+estado.start();
 
 /**
  * Get port from environment and store in Express.

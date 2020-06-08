@@ -66,11 +66,29 @@ async function putCoord(coord,id){
   }
 };
 
+
+getPassadeiraProxima = function(passadeiras, utilizador){
+    var result = null
+    var length = passadeiras.length;
+    var i = 0;
+    var distance = Number.MAX_SAFE_INTEGER
+    //console.log(passadeiras)
+    //console.log(utilizador)
+    passadeiras.forEach(pass => {
+       // console.log(pass)
+        var distanceAtual = geolib.getDistance(utilizador, pass)
+        if(distanceAtual < 50 && distanceAtual < distance ) {distance = distanceAtual; result = pass}
+    })
+    return result;
+} 
+
 function sendCoords(){
   var aux = 0;
   mapa.forEach(c =>{
+    var result = getPassadeiraProxima()
     if(indices[aux]<c.coords.length){
-      putCoord(c.coords[indices[aux]],c.id)
+      if(result!= null)
+        putCoord(c.coords[indices[aux]],c.id,)
       indices[aux]++;
     }
     else{
