@@ -1,0 +1,2 @@
+cd ../apiPassadeiras
+npm start

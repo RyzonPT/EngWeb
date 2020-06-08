@@ -1,0 +1,2 @@
+cd ../apiPedestre
+npm start

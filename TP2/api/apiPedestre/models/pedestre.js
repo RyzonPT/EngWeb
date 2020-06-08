@@ -41,9 +41,7 @@ Pedestre.getAllPedestres = function (){
                 console.log("error: ", err);
                 reject(err);
             }
-            else{
-              console.log('Pedestre : ', res);  
-
+            else{ 
               resolve(res);
             }
         });   
