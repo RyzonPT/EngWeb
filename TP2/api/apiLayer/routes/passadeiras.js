@@ -33,9 +33,53 @@ router.put('/:id', function(req, res, next) {
 });
 
 router.delete('/:id', function(req, res, next) {
-    axios.remove(apiPassadeira)
+    axios.delete(apiPassadeira + req.params.id)
     .then(dados => res.jsonp(dados.data))
     .catch(error => res.status(500).jsonp(error) )
 });
+
+
+//////////////// Passadeiras Pedestres
+
+router.post('/passadeiraspedestres', function(req, res, next) {
+    axios.post(apiPassadeira + 'passadeiraspedestres', req.body)
+    .then(dados => res.jsonp(dados.data))
+    .catch(error => res.status(500).jsonp(error) )
+  });
+  
+  router.get('/passadeiraspedestres', function(req, res, next) {
+    axios.get(apiPassadeira + 'passadeiraspedestres')
+    .then(dados => res.jsonp(dados.data))
+    .catch(error => res.status(500).jsonp(error) )
+  });
+  
+  
+  router.delete('/passadeiraspedestres', function(req, res, next) {
+    axios.delete(apiPassadeira + 'passadeiraspedestres', req.body)
+    .then(dados => res.jsonp(dados.data))
+    .catch(error => res.status(500).jsonp(error) )
+  });
+  
+  
+  /////////////// Passadeiras Veiculos
+  
+  router.post('/passadeirasveiculos', function(req, res, next) {
+    axios.post(apiPassadeira + 'passadeirasveiculos', req.body)
+    .then(dados => res.jsonp(dados.data))
+    .catch(error => res.status(500).jsonp(error) )
+  });
+  
+  router.get('/passadeirasveiculos', function(req, res, next) {
+    axios.get(apiPassadeira + 'passadeirasveiculos')
+    .then(dados => res.jsonp(dados.data))
+    .catch(error => res.status(500).jsonp(error) )
+  });
+  
+  
+  router.delete('/passadeirasveiculos', function(req, res, next) {
+    axios.delete(apiPassadeira + 'passadeirasveiculos', req.body)
+    .then(dados => res.jsonp(dados.data))
+    .catch(error => res.status(500).jsonp(error) )
+  });
 
 module.exports = router;

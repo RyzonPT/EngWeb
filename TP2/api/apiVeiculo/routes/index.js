@@ -23,9 +23,11 @@ router.post('/veiculos', function(req, res, next) {
 });
 
 router.put('/veiculos/:id', function(req, res, next) {
+  var veiculo = req.body
+  veiculo.idVeiculo = req.params.idVeiculo
   Promise.all([
     Veiculos.update(req.params.id, req.body),
-    axios.post('http://localhost:3050/historico/' + 'veiculo', {idVeiculo: req.params.id, latitude: req.body.latitude, longitude: req.body.longitude})
+    axios.post('http://localhost:3050/historico/' + 'veiculo', veiculo)
   ])     
     .then(([a,b]) => {res.jsonp({Sucess :  true})} )
     .catch(([e1, e2]) => res.jsonp('error'))

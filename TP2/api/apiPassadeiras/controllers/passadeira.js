@@ -23,3 +23,28 @@ Passadeiras.listar = () => {
   };
 
 
+  Passadeiras.createPassadeiraPedestre = (p) => {
+    return Passadeira.createPassadeiraPedestre(p);
+  }
+
+  Passadeiras.getAllPassadeiraPedestre = () => {
+    return Passadeira.getAllPassadeiraPedestre();
+  }
+
+  Passadeiras.removePassadeiraPedestre = (p) => {
+    return Passadeira.removePassadeiraPedestre(p);
+  }
+
+
+
+  Passadeiras.createPassadeiraVeiculo = (p) => {
+    return Passadeira.createPassadeiraVeiculo(p);
+  }
+
+  Passadeiras.getAllPassadeiraVeiculo = () => {
+    return Passadeira.getAllPassadeiraVeiculo();
+  }
+
+  Passadeiras.removePassadeiraVeiculo = (p) => {
+    return Passadeira.removePassadeiraVeiculo(p);
+  }
