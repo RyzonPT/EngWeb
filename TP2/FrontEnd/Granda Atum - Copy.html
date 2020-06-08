@@ -72,6 +72,19 @@ function findVeiculo(veiculos,id){
 
 
 
+function findPedestre(veiculos,id){
+  var result = null;
+  veiculos.forEach(e =>{
+    if(e.idPedestre == id) { 
+      result = e;
+    }
+  })
+ return result
+
+}
+
+
+
 function refreshVeiculos(){
     newVeiculos.forEach(newV =>{
      // console.log(newV)
@@ -95,17 +108,18 @@ function refreshVeiculos(){
 
 
 function refreshPedestres(){
+  //console.log(newPedestres)
     newPedestres.forEach(newP =>{
-     // console.log(newV)
-        var oldP = findVeiculo(oldPedestres,newP.idPedestre);
-       // console.log("OLDV")
-       // console.log(oldV)
+       
+        var oldP = findPedestre(oldPedestres,newP.idPedestre);
+        //console.log("oldP")
+       // console.log(oldP)
 
         if( oldP == null){
-                newV.marker = new google.maps.Marker({
+                newP.marker = new google.maps.Marker({
                 position: new google.maps.LatLng(newP.latitude, newP.longitude),
                 map: map,
-                icon: 'carro3.png',
+                icon: 'pedestre.png',
                 title: "Latitude:"+newP.latitude+" | Longitude:"+newP.longitude,
                 rotation:"bearing"
             });
@@ -117,10 +131,10 @@ function refreshPedestres(){
 
 async function getVeiculo(){
     try {
-      console.log("FACER PEDIDO")
+    //  console.log("FACER PEDIDO")
       axios.get("http://localhost:4000/veiculos/")
       .then(dados =>{
-        console.log("CHEGOU PEDIDO")
+     //   console.log("CHEGOU PEDIDO")
         newVeiculos = dados.data
         refreshVeiculos()
       transition()
@@ -136,9 +150,10 @@ async function getPedestre(){
     try {
       axios.get("http://localhost:4000/pedestres/")
       .then(dados =>{
+        console.log(dados.data)
         newPedestres = dados.data
         refreshPedestres()
-      transition2()
+        transition2()
       })
       
     } catch (e) {
@@ -150,7 +165,7 @@ async function getPedestre(){
 function initPassadeiras(passadeiras){
   //console.log(passadeiras)
     passadeiras.forEach(p =>{
-      console.log(p)
+    //  console.log(p)
                 marker  = new google.maps.Marker({
                 position: new google.maps.LatLng(p.latitude, p.longitude),
                 map: map,
@@ -197,19 +212,18 @@ function transition(){
 }
 
 
-function transition(){
-       // console.log(oldVeiculos)
-      //  console.log(newVeiculos)
+function transition2(){
     oldPedestres.forEach(oldP =>{
 
      //   console.log(oldV.id)
-        newP = findVeiculo(newPedestres,oldP.idPedestre)
+        newP = findPedestre(newPedestres,oldP.idPedestre)
         
-        if(newV != null){
+        if(newP != null){
           
-          oldP.deltaLat = (newP.latitude - newP.latitude)/numDeltas;
-          oldP.deltaLng = (newP.longitude - newP.longitude)/numDeltas;
+          oldP.deltaLat = (newP.latitude - oldP.latitude)/numDeltas;
+          oldP.deltaLng = (newP.longitude - oldP.longitude)/numDeltas;
           oldP.i = 0;
+          console.log(oldP)
          // console.log(oldV)
           moveMarker(oldP);
         }
@@ -220,6 +234,7 @@ function transition(){
 
 
 setInterval(getVeiculo,2000)
+setInterval(getPedestre,2000)
 
 
 
