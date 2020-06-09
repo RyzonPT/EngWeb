@@ -1,8 +1,9 @@
 var mysql = require('mysql')
 var connection = mysql.createConnection({
-  host: 'localhost',
+  host: 'mysqldbpassadeira',
   user: 'root',
   password: 'root',
+  port: 3306,
   database: 'SPWS-passadeira'
 })
 
