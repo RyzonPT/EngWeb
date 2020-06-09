@@ -35,18 +35,21 @@ services:
     - "27017:27017"
   networks:
     - backend
+     
 
  mysqldbpassadeira:
-  image: bragamann/mysqlpassadeira:Jun9
+  image: mysqlpassadeira
   command: --default-authentication-plugin=mysql_native_password
   ports:
-    - "3306:33060"
+    - "3306:3306"
   networks:
     - backend
   environment:
       MYSQL_ROOT_PASSWORD: root
-  volumes:
-      - ./dockerfileMySQL/setup.sql:/docker-entrypoint-initdb.d
+  #volumes:
+   #   - ./dockerfileMySQL/setup.sql:/docker-entrypoint-initdb.d
+
 
 networks:
   backend:
+

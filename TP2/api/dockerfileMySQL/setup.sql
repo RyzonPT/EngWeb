@@ -1,4 +1,6 @@
-ALTER USER 'root'@'mysqldbpassadeira' IDENTIFIED WITH mysql_native_password BY 'root'
+CREATE USER 'passadeira'@'172.20.0.4' IDENTIFIED BY 'root';
+
+ALTER USER 'passadeira'@'172.20.0.4' IDENTIFIED WITH mysql_native_password BY 'root';
 
 -- MySQL Workbench Forward Engineering
 
@@ -37,3 +39,5 @@ DEFAULT CHARACTER SET = utf8;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+GRANT ALL PRIVILEGES ON *.* TO 'passadeira'@'172.20.0.4' WITH GRANT OPTION;

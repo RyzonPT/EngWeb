@@ -3,7 +3,7 @@ var router = express.Router();
 
 var axios = require('axios')
 
-var apiPassadeira = 'http://localhost:3051/passadeiras/'
+var apiPassadeira = 'passadeira://passadeira:3051/passadeiras/'
 
 
 /*  Path:   /passadeiras */
