@@ -127,15 +127,24 @@ function refreshPedestres(){
         }
     })
 }
-
+function deleteOldVeiculo(){
+  oldVeiculos.forEach((v,index)=>{
+    var newV = findPedestre(newVeiculos,v)
+    if(newV == null){
+      v.marker.setMap(null)
+      oldVeiculos.splice(index, 1);
+    }
+  })
+}
 
 async function getVeiculo(){
     try {
     //  console.log("FACER PEDIDO")
-      axios.get("http://localhost:4000/veiculos/")
+      axios.get("http://localhost:4000/veiculos/passadeiras")
       .then(dados =>{
      //   console.log("CHEGOU PEDIDO")
         newVeiculos = dados.data
+        deleteOldVeiculo()
         refreshVeiculos()
       transition()
       })
@@ -147,7 +156,7 @@ async function getVeiculo(){
 
 
 function deleteOldPedestre(){
-  oldPedestres.forEach((item,index)=>{
+  oldPedestres.forEach((p,index)=>{
     var newP = findPedestre(newPedestres,p)
     if(newP == null){
       p.marker.setMap(null)

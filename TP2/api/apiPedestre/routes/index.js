@@ -6,7 +6,7 @@ var axios = require('axios')
 
 router.get('/pedestres/passadeiras/:id', function(req, res, next) {
  Pedestres.getNumberPedestres(req.params.id)
-       .then(dados => res.jsonp(dados.number))
+       .then(dados => res.jsonp(dados[0].number) )
        .catch(error => res.status(500).jsonp(error) )
 });
 

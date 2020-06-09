@@ -24,6 +24,7 @@ var mapa = [
     ]
   },{
     id:2,
+    estado : 0,
     coords:[
       [41.555113,-8.406965],
     ]
@@ -78,11 +79,8 @@ function init(){
 
 function updatePedestrePassadeira(idPedestre,idPassadeira){
   try {
-     axios.put("http://localhost:4000/pedestres/passadeiras/"+idPedestre,{idPassadeira:idPassadeira});
+     res = axios.put("http://localhost:4000/pedestres/passadeiras/"+idPedestre,{idPassadeira:idPassadeira});
 
-    const todos = res.data;
-
-    return todos;
   } catch (e) {
     console.error(e);
   }
@@ -90,11 +88,8 @@ function updatePedestrePassadeira(idPedestre,idPassadeira){
 
 function putCoord(coord,id,idPassadeira){
   try {
-     axios.put("http://localhost:4000/pedestres/"+id,{latitude:coord[0],longitude:coord[1],idPassadeira: idPassadeira});
+     res = axios.put("http://localhost:4000/pedestres/"+id,{latitude:coord[0],longitude:coord[1],idPassadeira: idPassadeira,dist:dist});
 
-    const todos = res.data;
-
-    return todos;
   } catch (e) {
     console.error(e);
   }
@@ -166,6 +161,9 @@ function updateTable(){
       </td>
       <td>
           `+e.coords[x][1]+`
+      </td>
+      <td>
+      `+e.estado+`
       </td>
     </tr>
     `)
