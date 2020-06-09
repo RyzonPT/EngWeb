@@ -72,9 +72,9 @@ function findVeiculo(veiculos,id){
 
 
 
-function findPedestre(veiculos,id){
+function findPedestre(pedestres,id){
   var result = null;
-  veiculos.forEach(e =>{
+  pedestres.forEach(e =>{
     if(e.idPedestre == id) { 
       result = e;
     }
@@ -127,15 +127,24 @@ function refreshPedestres(){
         }
     })
 }
-
+function deleteOldVeiculo(){
+  oldVeiculos.forEach((v,index)=>{
+    var newV = findPedestre(newVeiculos,v)
+    if(newV == null){
+      v.marker.setMap(null)
+      oldVeiculos.splice(index, 1);
+    }
+  })
+}
 
 async function getVeiculo(){
     try {
     //  console.log("FACER PEDIDO")
-      axios.get("http://localhost:4000/veiculos/")
+      axios.get("http://localhost:4000/veiculos/passadeiras")
       .then(dados =>{
      //   console.log("CHEGOU PEDIDO")
         newVeiculos = dados.data
+        deleteOldVeiculo()
         refreshVeiculos()
       transition()
       })
@@ -146,12 +155,24 @@ async function getVeiculo(){
 };
 
 
+function deleteOldPedestre(){
+  oldPedestres.forEach((p,index)=>{
+    var newP = findPedestre(newPedestres,p)
+    if(newP == null){
+      p.marker.setMap(null)
+      oldPedestres.splice(index, 1);
+    }
+  })
+}
+
+
 async function getPedestre(){
     try {
-      axios.get("http://localhost:4000/pedestres/")
+      axios.get("http://localhost:4000/pedestres/passadeiras")
       .then(dados =>{
         console.log(dados.data)
         newPedestres = dados.data
+        deleteOldPedestre()
         refreshPedestres()
         transition2()
       })

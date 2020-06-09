@@ -40,6 +40,7 @@ router.get('/:id', function(req, res, next) {
   });
   
   router.put('/:id', function(req, res, next) {   
+    console.log("Distancia: " + req.body.dist)
     axios.put(apiPedestres + req.params.id, req.body)
       .then(dados => res.jsonp(dados.data))
       .catch(error => res.status(500).jsonp(error) )

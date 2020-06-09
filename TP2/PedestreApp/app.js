@@ -3,6 +3,7 @@ console.log("TESTE")
 var mapa = [
   {
     id:1,
+    estado:0,
     coords:[
       [41.555061, -8.401276],
       [41.555113, -8.406965],
@@ -23,11 +24,13 @@ var mapa = [
     ]
   },{
     id:2,
+    estado : 0,
     coords:[
       [41.555113,-8.406965],
     ]
   },{
     id:3,
+    estado:0,
     coords:[
       [41.553504, -8.406679],
       [41.555113, -8.406965],
@@ -38,6 +41,7 @@ var mapa = [
     ]
   },{
     id:4,
+    estado:0,
     coords:[[41.554154, -8.400518], [41.554467, -8.400711], [41.554724, -8.400958], [41.555163, -8.401273], [41.555438, -8.401252], [41.555610, -8.401452], [41.555838, -8.401682], [41.555610, -8.401452],  [41.555438, -8.401252], [41.555163, -8.401273],  [41.554724, -8.400958], [41.554467, -8.400711], [41.554154, -8.400518] ]
   }
 ]
@@ -73,16 +77,19 @@ function init(){
   })
 }
 
-async function putCoord(coord,id,idPassadeira){
+function updatePedestrePassadeira(idPedestre,idPassadeira){
   try {
-    console.log("ENTEI")
-     res = await axios.put("http://localhost:4000/pedestres/"+id,{latitude:coord[0],longitude:coord[1],idPassadeira: idPassadeira});
+     res = axios.put("http://localhost:4000/pedestres/passadeiras/"+idPedestre,{idPassadeira:idPassadeira});
 
-    const todos = res.data;
+  } catch (e) {
+    console.error(e);
+  }
+};
 
-    console.log("PONTO A");
+function putCoord(coord,id,idPassadeira){
+  try {
+     res = axios.put("http://localhost:4000/pedestres/"+id,{latitude:coord[0],longitude:coord[1],idPassadeira: idPassadeira,dist:dist});
 
-    return todos;
   } catch (e) {
     console.error(e);
   }
@@ -110,7 +117,17 @@ function sendCoords(){
     if(indices[aux]<c.coords.length){
       var result = getPassadeiraProxima(c.coords[indices[aux]])
       if(result!= null){
+        if(c.estado == 0){
+          updatePedestrePassadeira(c.id,result.idPassadeira)
+          c.estado = 1
+        }
         putCoord(c.coords[indices[aux]],c.id,result.idPassadeira)
+      }
+      else{
+        if(c.estado == 1){
+          updatePedestrePassadeira(c.id,-1)
+          c.estado = 0;
+        }
       }
       indices[aux]++;
     }
@@ -144,6 +161,9 @@ function updateTable(){
       </td>
       <td>
           `+e.coords[x][1]+`
+      </td>
+      <td>
+      `+e.estado+`
       </td>
     </tr>
     `)

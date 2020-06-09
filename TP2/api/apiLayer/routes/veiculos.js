@@ -41,7 +41,7 @@ router.get('/:id', function(req, res, next) {
   });
   
   router.put('/:id', function(req, res, next) {
-
+      console.log("Distancia: " + req.body.dist)
     
       axios.get(apiPassadeira + 'semaforo/' + req.body.idPassadeira)
       .then(semaf => {

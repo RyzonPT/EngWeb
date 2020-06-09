@@ -3,7 +3,8 @@ console.log("TESTE")
 var mapa = [
   {
     id:1,
-    estado :1,
+    estado :0,
+    ordem: 1,
     coords:[
       [41.553504, -8.406679],
       [41.555113, -8.406965],
@@ -24,7 +25,8 @@ var mapa = [
     ]
   },{
     id:2,
-    estado : 1,
+    estado : 0,
+    ordem: 1,
     coords:[
       [41.553504, -8.406679],
       [41.555113, -8.406965],
@@ -35,11 +37,13 @@ var mapa = [
     ]
   },{
     id:3,
-    estado : 1,
+    estado : 0,
+    ordem : 1,
     coords:[[41.552351, -8.407352], [41.552857, -8.405968], [41.553431, -8.404713],  [41.553953, -8.403447], [41.554394, -8.402460], [41.554876, -8.401280],  [41.555342, -8.400175], [41.555799, -8.398930], [41.556209, -8.397718], [41.556458, -8.397160], [41.556803, -8.397471], [41.556538, -8.397975], [41.555960, -8.399145], [41.555398, -8.400411], [41.554860, -8.401730], [41.554314, -8.402996], [41.553840, -8.404133],  [41.553302, -8.405528], [41.552869, -8.406751], [41.552620, -8.407245]   ]
   },{
     id:4,
-    estado : 1,
+    estado : 0,
+    ordem: 1,
     coords:[
       [41.553504, -8.406679],
       [41.555113, -8.406965],
@@ -78,19 +82,37 @@ function init(){
   })
 }
 
-async function putCoord(coord,id,idPassadeira){
+async function updateVeiculoPassadeira(id,idPassadeira){
+  try {
+    console.log("WOWOW"+idPassadeira)
+    res = await axios.put("http://localhost:4000/veiculos/passadeiras/"+id,{idPassadeira:idPassadeira});
+    console.log(res)
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+function avaliaNotificacao(noti){
+    if(noti.semaforo == "vermelho" && noti.count == 0)
+    return 1
+    else return 0;
+}
+
+async function putCoord(aux,c,idPassadeira){
+    var coord = c.coords[indices[aux]]
+    var id = c.id
   try {
      res = await axios.put("http://localhost:4000/veiculos/"+id,{latitude:coord[0],longitude:coord[1],idPassadeira:idPassadeira,dist:dist});
 
-    const todos = res.data;
     console.log(res.data)
-    coord.estado = res.data.semaforo; /// res.data
+    console.log("AVALIACAO: "+avaliaNotificacao(res.data))
+    c.ordem = avaliaNotificacao(res.data) /// res.data
 
-    console.log("PONTO A");
-
-    return todos;
+    if(c.ordem == 1){
+      indices[aux]++;
+    }
   } catch (e) {
-    coord.estado = 0
+    c.ordem = 0
     console.error(e);
   }
 };
@@ -116,11 +138,23 @@ function sendCoords(){
   mapa.forEach(c =>{
     if(indices[aux]<c.coords.length){
       var result = getPassadeiraProxima(c.coords[indices[aux]])
-      if(result!=null)
-        putCoord(c.coords[indices[aux]],c.id,result.idPassadeira)
-      if(c.estado == 1){
-        indices[aux]++;
+      if(result!=null){
+        if(c.estado == 0){
+          updateVeiculoPassadeira(c.id,result.idPassadeira)
+          c.estado = 1
+        }
+        putCoord(aux,c,result.idPassadeira)
       }
+      else{
+        if(c.estado == 1){
+          updateVeiculoPassadeira(c.id,-1)
+          c.estado = 0;
+        }
+        if(c.ordem == 1){
+          indices[aux]++;
+        }
+      }
+
     }
     else{
       indices[aux] = 0
@@ -129,7 +163,7 @@ function sendCoords(){
   })
   updateTable()
 }
-setInterval(sendCoords,500)
+setInterval(sendCoords,1500)
 
 
 function updateTable(){
@@ -153,6 +187,12 @@ function updateTable(){
       </td>
       <td>
           `+e.coords[x][1]+`
+      </td>
+      <td>
+      `+e.estado+`
+      </td>
+      <td>
+      `+e.ordem+`
       </td>
     </tr>
     `)
