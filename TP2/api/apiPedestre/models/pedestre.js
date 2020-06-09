@@ -3,12 +3,13 @@ var Pedestre = function(pedreste){
     this.idPedestre = pedreste.idPedestre;
     this.latitude = pedreste.latitude;
     this.longitude = pedreste.longitude;
+    this.idPassadeira = pedreste.idPassadeira;
 };
 
 
 Pedestre.createPedestre = function (p) {    
     return new Promise(function(resolve, reject) {
-    sql.query("INSERT INTO pedestre (latitude,longitude) values (?,?)", [p.latitude,p.longitude], function (err, res) {
+    sql.query("INSERT INTO pedestre (latitude,longitude,idPassadeira) values (?,?,?)", [p.latitude,p.longitude,p.idPassadeira], function (err, res) {
             
             if(err) {
                 console.log("error: ", err);
@@ -50,7 +51,7 @@ Pedestre.getAllPedestres = function (){
 
 Pedestre.updatePedestre = function(id, p){
     return new Promise(function(resolve, reject) {
-sql.query("UPDATE pedestre SET latitude = ?, longitude = ? WHERE idPedestre = ?", [p.latitude,p.longitude, id], function (err, res) {
+sql.query("UPDATE pedestre SET latitude = ?, longitude = ?, idPassadeira = ? WHERE idPedestre = ?", [p.latitude,p.longitude, p.idPassadeira ,id], function (err, res) {
       if(err) {
           console.log("error: ", err);
           reject(err);
@@ -61,6 +62,21 @@ sql.query("UPDATE pedestre SET latitude = ?, longitude = ? WHERE idPedestre = ?"
 });   
 })
 };
+
+Pedestre.updatePassadeira = function(idPedestre, idPassadeira){
+    return new Promise(function(resolve, reject) {
+sql.query("UPDATE pedestre SET idPassadeira = ? WHERE idPedestre = ?", [idPassadeira ,idPedestre], function (err, res) {
+      if(err) {
+          console.log("error: ", err);
+          reject(err);
+         }
+       else{   
+        resolve(res);
+    }
+});   
+})
+};
+
 Pedestre.remove = function(id){
     return new Promise(function(resolve, reject) {
  sql.query("DELETE FROM pedestre WHERE idPedestre = ?", id, function (err, res) {
@@ -75,6 +91,34 @@ Pedestre.remove = function(id){
             }
         });   
     })
+};
+
+Pedestre.getPedestresPassadeira = function () {
+    return new Promise(function(resolve, reject) {
+    sql.query("Select * from pedestre where idPassadeira != -1", function (err, res) {             
+            if(err) {
+                console.log("error: ", err);
+                reject(err);
+            }
+            else{
+                resolve(res);
+            }
+        });   
+    }) 
+};
+
+Pedestre.getNumberPedestres = function (idPassadeira) {
+    return new Promise(function(resolve, reject) {
+    sql.query("Select count(*) AS number from pedestre where idPassadeira = ?", idPassadeira, function (err, res) {             
+            if(err) {
+                console.log("error: ", err);
+                reject(err);
+            }
+            else{
+                resolve(res);
+            }
+        });   
+    }) 
 };
 
 module.exports= Pedestre;

@@ -18,6 +18,15 @@ Veiculos.listar = () => {
     return Veiculo.update(id,v);
   };
 
+  
+  Veiculos.updatePassadeira = (idVeiculo,idPassadeira) => {
+    return Veiculo.updatePassadeira(idVeiculo,idPassadeira);
+  };
+
+  Veiculos.getVeiculosPassadeira = () => {
+    return Veiculo.getVeiculosPassadeira();
+  };
+
   Veiculos.remove = (id) => {
     return Veiculo.remove(id);
   };

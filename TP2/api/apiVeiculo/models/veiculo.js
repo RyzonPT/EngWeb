@@ -3,12 +3,13 @@ var Veiculo = function(v){
     this.idVeiculo = v.idVeiculo;
     this.latitude = v.latitude;
     this.longitude = v.longitude;
+    this.idPassadeira = v.idPassadeira;
 };
 
 
 Veiculo.create = function (p) {    
     return new Promise(function(resolve, reject) {
-    sql.query("INSERT INTO veiculo (latitude,longitude) values (?,?)", [p.latitude,p.longitude], function (err, res) {
+    sql.query("INSERT INTO veiculo (latitude,longitude, idPassadeira) values (?,?,?)", [p.latitude,p.longitude,p.idPassadeira], function (err, res) {
             
             if(err) {
                 console.log("error: ", err);
@@ -50,7 +51,21 @@ Veiculo.getAll = function (){
 
 Veiculo.update = function(id, p){
     return new Promise(function(resolve, reject) {
-sql.query("UPDATE veiculo SET latitude = ?, longitude = ? WHERE idVeiculo = ?", [p.latitude,p.longitude, id], function (err, res) {
+sql.query("UPDATE veiculo SET latitude = ?, longitude = ?, idPassadeira = ? WHERE idVeiculo = ?", [p.latitude,p.longitude, p.idPassadeira ,id], function (err, res) {
+      if(err) {
+          console.log("error: ", err);
+          reject(err);
+         }
+       else{   
+        resolve(res);
+        }
+});   
+})
+};
+
+Veiculo.updatePassadeira = function(idVeiculo, idPassadeira){
+    return new Promise(function(resolve, reject) {
+sql.query("UPDATE veiculo SET idPassadeira = ? WHERE idVeiculo = ?", [idPassadeira ,idVeiculo], function (err, res) {
       if(err) {
           console.log("error: ", err);
           reject(err);
@@ -61,6 +76,7 @@ sql.query("UPDATE veiculo SET latitude = ?, longitude = ? WHERE idVeiculo = ?", 
 });   
 })
 };
+
 Veiculo.remove = function(id){
     return new Promise(function(resolve, reject) {
  sql.query("DELETE FROM veiculo WHERE idVeiculo = ?", id, function (err, res) {
@@ -75,6 +91,20 @@ Veiculo.remove = function(id){
             }
         });   
     })
+};
+
+Veiculo.getVeiculosPassadeira = function () {
+    return new Promise(function(resolve, reject) {
+    sql.query("Select * from veiculo where idPassadeira != -1 ", function (err, res) {             
+            if(err) {
+                console.log("error: ", err);
+                reject(err);
+            }
+            else{
+                resolve(res);
+            }
+        });   
+    }) 
 };
 
 module.exports= Veiculo;

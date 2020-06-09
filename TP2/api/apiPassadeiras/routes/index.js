@@ -111,6 +111,15 @@ router.get('/passadeiras/pedestres', function(req, res, next) {
 })*/
 
 /* GET Passadeiras. */
+
+router.get('/passadeiras/semaforo/:id', function(req, res, next) {
+  Passadeiras.get(req.params.id)
+        .then(data => {
+          res.jsonp(data[0].estado)
+        })
+        .catch(e => res.jsonp('Error'))
+});
+
 router.get('/passadeiras', function(req, res, next) {
   Passadeiras.listar()
     .then(dados =>{res.jsonp(dados)})
@@ -175,43 +184,53 @@ router.delete('/passadeiras/:id', function(req, res, next) {
 
 //////////////// Passadeiras Pedestres
 
-router.post('/passadeiraspedestres', function(req, res, next) {
-  Passadeiras.create(req.body)
+router.post('/passadeiras/pedestres', function(req, res, next) {
+  Passadeiras.createPassadeiraPedestre(req.body)
     .then(dados =>{res.jsonp(dados)})
     .catch(erro => res.write(erro))
 });
 
-router.get('/passadeiraspedestres', function(req, res, next) {
+router.get('/passadeiras/pedestres', function(req, res, next) {
   Passadeiras.getAllPassadeiraPedestre()
     .then(dados =>{res.jsonp(dados)})
     .catch(erro => res.write(erro))
 });
 
 
-router.delete('/passadeiraspedestres', function(req, res, next) {
-  Passadeiras.remove(req.body)
+router.delete('/passadeiras/pedestres', function(req, res, next) {
+  Passadeiras.removePassadeiraPedestre(req.body)
     .then(dados =>{res.jsonp(dados)})
     .catch(erro => res.write(erro))
 });
 
+router.get('/passadeiras/pedestres/:id', function(req, res, next) {
+  Passadeiras.getAllCountPedestres(req.params.id)
+    .then(dados =>{
+      Passadeiras.get(req.params.id)
+        .then(data => {
+          res.jsonp({semaforo: data[0].estado, count: dados[0].pedestres})
+        })
+    })
+    .catch(erro => res.write(erro))
+});
 
 /////////////// Passadeiras Veiculos
 
-router.post('/passadeirasveiculos', function(req, res, next) {
-  Passadeiras.create(req.body)
+router.post('/passadeiras/veiculos', function(req, res, next) {
+  Passadeiras.createPassadeiraVeiculo(req.body)
     .then(dados =>{res.jsonp(dados)})
     .catch(erro => res.write(erro))
 });
 
-router.get('/passadeirasveiculos', function(req, res, next) {
+router.get('/passadeiras/veiculos', function(req, res, next) {
   Passadeiras.getAllPassadeiraVeiculo()
     .then(dados =>{res.jsonp(dados)})
     .catch(erro => res.write(erro))
 });
 
 
-router.delete('/passadeirasveiculos', function(req, res, next) {
-  Passadeiras.remove(req.body)
+router.delete('/passadeiras/veiculos', function(req, res, next) {
+  Passadeiras.removePassadeiraVeiculo(req.body)
     .then(dados =>{res.jsonp(dados)})
     .catch(erro => res.write(erro))
 });
