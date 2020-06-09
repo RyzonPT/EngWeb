@@ -5,7 +5,7 @@ var axios = require('axios')
 
 /* Path: /historico */
 
-var apiHistorico = 'http://localhost:3050/historico/'
+var apiHistorico = 'historico://historico:3050/historico/'
 
 router.get('/pedestres/:id', function(req, res, next) {
     axios.get(apiHistorico + 'pedestres/' + req.params.id)

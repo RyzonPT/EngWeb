@@ -1,0 +1,52 @@
+version: "2"
+services:
+
+ apilayer:
+  image: bragamann/apilayer:Jun9
+  ports:
+    - "4000:4000"
+  depends_on:
+    - historico
+    - passadeira
+  networks:
+    - backend
+
+ historico:
+  image: bragamann/apihistorico:Jun9
+  ports:
+    - "3050:3050"
+  depends_on:
+    - mongodb
+  networks:
+    - backend
+  
+ passadeira:
+  image: bragamann/apipassadeira:Jun9
+  ports:
+    - "3051:3051"
+  depends_on:
+    - mysqldbpassadeira
+  networks:
+    - backend
+
+ mongodb:
+  image: bragamann/mongoengweb:Jun9
+  ports:
+    - "27017:27017"
+  networks:
+    - backend
+
+ mysqldbpassadeira:
+  image: bragamann/mysqlpassadeira:Jun9
+  command: --default-authentication-plugin=mysql_native_password
+  ports:
+    - "3306:33060"
+  networks:
+    - backend
+  environment:
+      MYSQL_ROOT_PASSWORD: root
+  volumes:
+      - ./dockerfileMySQL/setup.sql:/docker-entrypoint-initdb.d
+
+networks:
+  backend:

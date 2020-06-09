@@ -9,7 +9,7 @@ var indexRouter = require('./routes/index');
 
 var app = express();
 
-mongoose.connect('mongodb://127.0.0.1:27017/Historico_SPWS', {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect('mongodb://mongodb:27017/Historico_SPWS', {useNewUrlParser: true, useUnifiedTopology: true})
   .then(()=> console.log('Mongo ready: ' + mongoose.connection.readyState))
   .catch((erro)=> console.log('Mongo: erro na conexão: ' + erro))
 
