@@ -6,7 +6,6 @@ var timeout;
 
 module.exports.start = function(){
     timeout = updateEstado();
-    console.log("TESTE ESTADO")
 }
 
 function mudaEstado(){
@@ -29,7 +28,6 @@ function updateEstado(){
     .then(passadeiras =>{
         mudaEstado()
         passadeiras.forEach(pass => {
-            console.log(pass)
             pass.estado = estado
             Passadeira.update(pass.idPassadeira,pass)
         });

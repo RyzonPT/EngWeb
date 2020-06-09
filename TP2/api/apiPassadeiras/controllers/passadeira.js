@@ -1,6 +1,8 @@
 
 const Passadeira = require("../models/passadeira.js");
 const Passadeiras = module.exports
+const PassadeirasPedestre = require("../models/passadeirapedestre.js")
+const PassadeirasVeiculo = require("../models/passadeiraveiculo.js")
 
 Passadeiras.listar = () => {
     return Passadeira.getAll();
@@ -23,28 +25,34 @@ Passadeiras.listar = () => {
   };
 
 
+  ///////////////// Pedestres
+
   Passadeiras.createPassadeiraPedestre = (p) => {
-    return Passadeira.createPassadeiraPedestre(p);
+    return PassadeirasPedestre.createPassadeiraPedestre(p);
   }
 
   Passadeiras.getAllPassadeiraPedestre = () => {
-    return Passadeira.getAllPassadeiraPedestre();
+    return PassadeirasPedestre.getAllPassadeiraPedestre();
   }
 
   Passadeiras.removePassadeiraPedestre = (p) => {
-    return Passadeira.removePassadeiraPedestre(p);
+    return PassadeirasPedestre.removePassadeiraPedestre(p);
   }
 
+  Passadeiras.getAllCountPedestres = (id) => {
+    return PassadeirasPedestre.getAllCountPedestres(id);
+  }
 
+  ///////////////// Veiculos
 
   Passadeiras.createPassadeiraVeiculo = (p) => {
-    return Passadeira.createPassadeiraVeiculo(p);
+    return PassadeirasVeiculo.createPassadeiraVeiculo(p);
   }
 
   Passadeiras.getAllPassadeiraVeiculo = () => {
-    return Passadeira.getAllPassadeiraVeiculo();
+    return PassadeirasVeiculo.getAllPassadeiraVeiculo();
   }
 
   Passadeiras.removePassadeiraVeiculo = (p) => {
-    return Passadeira.removePassadeiraVeiculo(p);
+    return PassadeirasVeiculo.removePassadeiraVeiculo(p);
   }

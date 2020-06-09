@@ -4,6 +4,18 @@ var Pedestres = require('../controllers/pedestre.js')
 
 var axios = require('axios')
 
+router.get('/pedestres/passadeiras/:id', function(req, res, next) {
+ Pedestres.getNumberPedestres(req.params.id)
+       .then(dados => res.jsonp(dados.number))
+       .catch(error => res.status(500).jsonp(error) )
+});
+
+router.get('/pedestres/passadeiras', function(req, res, next) {
+  Pedestres.getPedestresPassadeira()
+  .then(dados =>{res.jsonp(dados)})
+  .catch(erro => res.write(erro))
+});
+
 router.get('/pedestres', function(req, res, next) {
   Pedestres.listar()
   .then(dados =>{res.jsonp(dados)})
@@ -20,6 +32,13 @@ router.post('/pedestres', function(req, res, next) {
   Pedestres.createPedestre(req.body)
   .then(dados =>{res.jsonp(dados)})
   .catch(erro => res.write(erro))
+});
+
+router.put('/pedestres/passadeiras/:id', function(req, res, next) {
+  
+  Pedestres.updatePassadeira(req.params.id, req.body.idPassadeira)
+    .then(a => res.jsonp({Sucess :  true}) )
+    .catch(e => res.status(500).jsonp('error'))              
 });
 
 

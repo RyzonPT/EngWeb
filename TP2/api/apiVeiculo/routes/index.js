@@ -4,6 +4,12 @@ var Veiculos = require('../controllers/veiculo.js')
 
 var axios = require('axios')
 
+router.get('/veiculos/passadeiras', function(req, res, next) {
+  Veiculos.getVeiculosPassadeira()
+  .then(dados =>{res.jsonp(dados)})
+  .catch(erro => res.write(erro))
+});
+
 router.get('/veiculos', function(req, res, next) {
   Veiculos.listar(req.params.id,req.body)
   .then(dados =>{res.jsonp(dados)})
@@ -21,6 +27,14 @@ router.post('/veiculos', function(req, res, next) {
   .then(dados =>{res.jsonp(dados)})
   .catch(erro => res.write(erro))
 });
+
+router.put('/veiculos/passadeiras/:id', function(req, res, next) {
+ 
+    Veiculos.updatePassadeira(req.params.id, req.body.idPassadeira)   
+    .then(a => {res.jsonp({Sucess :  true})} )
+    .catch(e1 => res.jsonp('error'))
+});
+
 
 router.put('/veiculos/:id', function(req, res, next) {
   var veiculo = req.body
